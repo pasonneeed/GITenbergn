@@ -1,4 +1,5 @@
 import Arrow from '@assets/icons/arrow.svg?react';
+import clsx from 'clsx';
 
 interface PaginationProps {
   totalPages: number;
@@ -26,11 +27,10 @@ const Pagination = ({
           <button
             key={page}
             onClick={() => handleClick(page)}
-            className={`flex h-9 w-9 cursor-pointer flex-row items-center justify-center p-[10px] text-gray-500 font-B02-SB ${
-              page === currentPage
-                ? 'text-purple-500 font-B02-SB'
-                : 'text-gray-500 font-B02-SB'
-            }`}
+            className={clsx(
+              'flex h-9 w-9 cursor-pointer flex-row items-center justify-center p-[10px] font-B02-SB',
+              page === currentPage ? 'text-purple-500' : 'text-gray-500'
+            )}
           >
             {page}
           </button>
