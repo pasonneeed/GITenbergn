@@ -26,7 +26,7 @@ const Signup = ({ onNext }: SignupProps) => {
 
   const onSubmit = (data: SignupFormValues) => {
     console.log('제출된 값:', data);
-    onNext?.();
+    onNext();
   };
 
   return (
