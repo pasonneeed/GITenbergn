@@ -2,12 +2,20 @@ import Cancel from '@assets/icons/bigcancel.svg?react';
 import { useState } from 'react';
 
 interface ModalProps {
-  onClose: () => void;
+  onClose: (selectedAddress?: string) => void;
 }
 
 const AddressModal = ({ onClose }: ModalProps) => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
   const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
+
+  const handleClose = () => {
+    if (selectedCity && selectedDistrict) {
+      onClose(`${selectedCity} ${selectedDistrict}`);
+    } else {
+      onClose();
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
@@ -18,7 +26,7 @@ const AddressModal = ({ onClose }: ModalProps) => {
           </div>
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             className="absolute right-5 top-1/2 -translate-y-1/2"
           >
             <Cancel className="h-[18px] w-[18px]" />

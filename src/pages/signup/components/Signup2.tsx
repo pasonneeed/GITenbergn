@@ -11,10 +11,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 const schema = z.object({
   nickname: z
     .string()
+    .trim()
     .min(2, '2자 이상 8자 이내의 한글, 영문, 숫자만 입력해주세요.')
     .max(8, '2자 이상 8자 이내의 한글, 영문, 숫자만 입력해주세요.')
-    .regex(/^[a-zA-Z0-9]+$/, '특수문자를 없애주세요')
-    .refine((val) => val.length !== 1, { message: '2자 이상 입력하세요' }),
+    .regex(/^[ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]+$/, '특수문자를 없애주세요'),
+
   date: z
     .string()
     .regex(/^\d{4}\/\d{2}\/\d{2}$/, 'YYYY/MM/DD 형식으로 입력해주세요'),
@@ -28,6 +29,7 @@ const Signup2 = () => {
   >(null);
   const isMobile = useMediaQuery();
   const [isModal, setIsModal] = useState<boolean>(false);
+  const [address, setAddress] = useState('');
 
   const {
     handleSubmit,
@@ -76,6 +78,8 @@ const Signup2 = () => {
                 undertextClassName={
                   errors.nickname?.message ? 'text-warning' : 'text-gray-500'
                 }
+                minLength={1}
+                maxLength={8}
               />
             )}
           />
@@ -132,7 +136,7 @@ const Signup2 = () => {
           </div>
         </div>
 
-        <AddressInput onClick={() => setIsModal(true)} />
+        <AddressInput onClick={() => setIsModal(true)} address={address} />
       </div>
 
       <div
@@ -150,7 +154,16 @@ const Signup2 = () => {
         />
       </div>
 
-      {isModal && <AddressModal onClose={() => setIsModal(false)} />}
+      {isModal && (
+        <AddressModal
+          onClose={(selectedAddress?: string) => {
+            if (selectedAddress) {
+              setAddress(selectedAddress);
+            }
+            setIsModal(false);
+          }}
+        />
+      )}
     </form>
   );
 };
