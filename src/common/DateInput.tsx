@@ -2,6 +2,7 @@ import { useRef, forwardRef, ForwardedRef } from 'react';
 import * as React from 'react';
 
 export interface DateInputProps {
+  title?: string;
   label: string;
   name: 'startDate' | 'endDate';
   value: string;
@@ -11,7 +12,7 @@ export interface DateInputProps {
 
 const DateInput = forwardRef(
   (
-    { label, name, value, onChange, autoFocusTo }: DateInputProps,
+    { title, label, name, value, onChange, autoFocusTo }: DateInputProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     const innerRef = useRef<HTMLInputElement>(null);
@@ -39,9 +40,8 @@ const DateInput = forwardRef(
 
     return (
       <div className="flex w-full min-w-0 flex-1 flex-col">
-        <label className="mb-2 text-sm font-semibold text-gray-900">
-          {label}
-        </label>
+        <label className="mb-2 text-gray-900 font-T05-SB">{title}</label>
+        <label className="mb-2 text-gray-500 font-C01-M">{label}</label>
         <div className="flex items-center rounded-xl border px-4 py-5 text-sm text-gray-700 shadow-sm focus-within:border-purple-500">
           <input
             ref={inputRef}

@@ -4,9 +4,10 @@ import DropDownIcon from '@assets/icons/drop_down.svg?react';
 import Divider from '@common/Divider.tsx';
 
 export interface DropDownProps<T extends string> {
-  placeholder: string;
+  placeholder?: string;
   options: T[];
   value: T | '';
+  title?: string;
   label?: string;
   onSelect: (value: T) => void;
   backButton?: { label: string; onClick: () => void };
@@ -17,6 +18,7 @@ export default function DropDown<T extends string>({
   placeholder,
   options,
   value,
+  title,
   label,
   onSelect,
   backButton,
@@ -26,15 +28,17 @@ export default function DropDown<T extends string>({
 
   return (
     <div className="flex w-full min-w-0 flex-1 flex-col">
+      <label className="text-gray-900 font-T05-SB">{title}</label>
       <div ref={ref} className="relative">
         <label className="block min-h-[20px] text-sm font-semibold text-gray-900">
           {label}
         </label>
+        <div className="h-4" />
         <div
           onClick={toggle}
           className="flex cursor-pointer items-center justify-between rounded-2xl border px-4 py-5 text-gray-500"
         >
-          <span>{value || placeholder}</span>
+          <span>{placeholder}</span>
           <div
             className={`transition-transform duration-200 ${
               isOpen ? 'rotate-180' : ''
