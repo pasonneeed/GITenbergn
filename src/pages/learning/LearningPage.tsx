@@ -3,8 +3,14 @@ import PencilIcon from '@assets/icons/pencil.svg';
 import LearningDummy, { LearningItem } from '@utils/data/learn/learnDummy.ts';
 import Footer from '@common/Footer.tsx';
 import LearningCard from '@pages/learning/components/LearningCard.tsx';
+import { useState } from 'react';
+import CardDetail from '@pages/learning/components/CardDetail.tsx';
 
 const LearningPage = () => {
+  const [cardId, setCardId] = useState<number>(0);
+
+  const selectedCardId = LearningDummy.find((item) => item.id === cardId);
+
   return (
     <div className="flex flex-col">
       <div className="bg-gray-100">
@@ -31,11 +37,22 @@ const LearningPage = () => {
       <div className="container mx-auto mb-6 px-4 pt-8">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {LearningDummy.map((item: LearningItem) => (
-            <LearningCard key={item.id} item={item} />
+            <div
+              key={item.id}
+              onClick={() => setCardId(item.id)}
+              className="cursor-pointer"
+            >
+              <LearningCard item={item} />
+            </div>
           ))}
         </div>
       </div>
       <Footer />
+      {selectedCardId && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <CardDetail item={selectedCardId} onClose={() => setCardId(0)} />
+        </div>
+      )}
     </div>
   );
 };
