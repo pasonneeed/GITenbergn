@@ -61,7 +61,7 @@ const DreamerCard = ({
       <Divider />
 
       <div className="mt-6 flex w-full flex-col gap-3">
-        {todotext.length === 0 ? (
+        {!todotext || todotext.length === 0 ? (
           <span className="text-gray-500 font-B02-M">
             작성된 할일 목록이 없어요
           </span>
