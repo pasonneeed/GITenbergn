@@ -29,7 +29,7 @@ const OnBoardingPage = () => {
         </div>
       </div>
 
-      <div className="mx-auto mt-10 w-full max-w-[700px] space-y-10">
+      <div className="mx-auto mt-10 flex h-[calc(100vh-200px)] w-full max-w-[700px] flex-col">
         {currentQuestionData && (
           <Questions
             question={currentQuestionData.question}
@@ -39,15 +39,17 @@ const OnBoardingPage = () => {
           />
         )}
 
-        <Navigation
-          onPrev={handlePrev}
-          onNext={handleNext}
-          disablePrev={curStep === 0 && curQuestionIndex === 0}
-          disableNext={
-            curStep === stepQuestions.length - 1 && !currentQuestionData
-          }
-          isLast={curStep === stepQuestions.length - 1}
-        />
+        <div className="mt-auto">
+          <Navigation
+            onPrev={handlePrev}
+            onNext={handleNext}
+            disablePrev={curStep === 0 && curQuestionIndex === 0}
+            disableNext={
+              curStep < stepQuestions.length - 1 && !currentQuestionData
+            }
+            isLast={curStep === stepQuestions.length - 1}
+          />
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import { useState, useMemo } from 'react';
-import stepQuestions from '@utils/data/onboard/onboardDummy.ts';
 
 interface StepQuestion {
   step: string;
@@ -13,7 +12,7 @@ export function useOnboarding(steps: StepQuestion[]) {
 
   const currentStepData = steps[curStep];
   const currentQuestionData = currentStepData.questions?.[curQuestionIndex];
-  const stepInfo = stepQuestions.map((s) => ({
+  const stepInfo = steps.map((s) => ({
     title: s.step,
     questionCount: s.questions?.length ?? 1,
   }));
@@ -27,7 +26,7 @@ export function useOnboarding(steps: StepQuestion[]) {
 
   const handleNext = () => {
     const totalQ = currentStepData.questions?.length ?? 0;
-    if (curQuestionIndex < totalQ - 1) {
+    if (totalQ > 0 && curQuestionIndex < totalQ - 1) {
       setCurQuestionIndex((q) => q + 1);
     } else {
       setCurStep((s) => s + 1);
@@ -55,7 +54,7 @@ export function useOnboarding(steps: StepQuestion[]) {
         .slice(0, curStep)
         .reduce((sum, st) => sum + (st.questions?.length ?? 1), 0) +
       curQuestionIndex;
-    const percent = Math.round((done / total) * 100);
+    const percent = total > 0 ? Math.round((done / total) * 100) : 0;
     return { totalQuestions: total, progressPercent: percent };
   }, [steps, curStep, curQuestionIndex]);
 

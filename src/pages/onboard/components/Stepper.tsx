@@ -8,7 +8,7 @@ interface StepInfo {
 interface StepperProps {
   curStep: number;
   curQuestionIndex: number;
-  steps: StepInfo[]; // 이제 questionCount 포함
+  steps: StepInfo[];
 }
 
 const Stepper = ({ curStep, curQuestionIndex, steps }: StepperProps) => {
@@ -19,12 +19,13 @@ const Stepper = ({ curStep, curQuestionIndex, steps }: StepperProps) => {
         const status: 'prev' | 'current' | 'next' =
           index < curStep ? 'prev' : index === curStep ? 'current' : 'next';
 
-        // 커넥터 채워질 비율 계산
         const fillPercent =
           index < curStep
             ? 100
             : index === curStep
-              ? (curQuestionIndex / step.questionCount) * 100
+              ? step.questionCount > 0
+                ? (curQuestionIndex / step.questionCount) * 100
+                : 0
               : 0;
 
         return (
