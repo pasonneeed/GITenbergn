@@ -2,7 +2,7 @@ import Button from '@common/Button.tsx';
 import { Input } from '@common/Input.tsx';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { loginSchema, LoginFormValues } from '@validation/loginSchema';
+import { loginSchema, LoginFormValues } from '@validation/login/loginSchema.ts';
 import LoginImage from '@assets/images/login.png';
 import Divider from '@common/Divider.tsx';
 
