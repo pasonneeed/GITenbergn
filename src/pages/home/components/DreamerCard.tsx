@@ -23,7 +23,7 @@ const DreamerCard = ({
   doneList,
 }: DreamerCardProps) => {
   return (
-    <div className="hover:drop-shadow-dropdown2 flex h-auto w-[384px] flex-col items-start rounded-[30px] border-[1.2px] border-gray-300 bg-white p-[30px] transition-shadow">
+    <div className="hover:shadow-shadow2 flex h-auto w-[384px] flex-col items-start rounded-[30px] border-[1.2px] border-gray-300 bg-white p-[30px] transition-shadow">
       <div className="flex flex-row gap-5">
         <img
           src={profile}
