@@ -1,13 +1,13 @@
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { LoginInput, LoginResponse, ErrorResponse } from '@type/login/mutation';
+import api from './api';
 
 export const useLoginMutation = () => {
   const navigate = useNavigate();
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
   const login = async (data: LoginInput): Promise<LoginResponse> => {
-    const response = await axios.post(`${BASE_URL}/v1/member/auth/login`, data);
+    const response = await api.post(`/v1/member/auth/login`, data);
     return response.data;
   };
 

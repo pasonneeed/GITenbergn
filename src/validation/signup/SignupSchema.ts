@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const SignupSchema = z
   .object({
-    id: z
+    loginId: z
       .string()
       .trim()
       .min(4, '4자 이상 입력해주세요')
