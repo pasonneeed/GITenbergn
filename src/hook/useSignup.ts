@@ -1,4 +1,6 @@
+import { useMutation } from '@tanstack/react-query';
 import api from './api';
+import { useNavigate } from 'react-router-dom';
 
 export interface SignupRequest {
   loginId: string;
@@ -9,7 +11,18 @@ export interface SignupRequest {
   regionCode?: string | null;
 }
 
-export const signupUser = async (data: SignupRequest) => {
+const signupUser = async (data: SignupRequest) => {
   const response = await api.post(`/v1/member/auth/sign-up`, data);
   return response.data;
+};
+
+export const useSignupMutation = () => {
+  const navigate = useNavigate();
+
+  return useMutation({
+    mutationFn: signupUser,
+    onSuccess: () => {
+      navigate('/login');
+    },
+  });
 };
