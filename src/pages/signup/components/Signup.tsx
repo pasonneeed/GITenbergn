@@ -1,20 +1,61 @@
+import { useForm, Controller } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '@common/Button';
 import { Input } from '@common/Input';
 import useMediaQuery from '@hook/useMediaQuery';
-import { useState } from 'react';
 
 interface SignupProps {
   onNext: () => void | undefined;
 }
 
+const SignupSchema = z
+  .object({
+    id: z
+      .string()
+      .min(4, '4자 이상 입력해주세요')
+      .max(20, '20자 이하로 입력해주세요')
+      .regex(/^[a-zA-Z0-9]+$/, '특수문자를 없애주세요'),
+    password: z
+      .string()
+      .min(8, '8자 이상 입력해주세요')
+      .max(16, '16자 이하로 입력해주세요')
+      .regex(/[a-z]/, '소문자를 포함해주세요')
+      .regex(/[A-Z]/, '대문자를 포함해주세요')
+      .regex(/[0-9]/, '숫자를 포함해주세요')
+      .regex(/[^A-Za-z0-9]/, '특수문자를 포함해주세요'),
+
+    passwordcheck: z.string(),
+  })
+  .refine((data) => data.password === data.passwordcheck, {
+    path: ['passwordcheck'],
+    message: '비밀번호가 일치하지 않습니다',
+  });
+
+type SignupFormValues = z.infer<typeof SignupSchema>;
+
 const Signup = ({ onNext }: SignupProps) => {
   const isMobile = useMediaQuery();
-  const [password, setPassword] = useState('');
-  const [passwordcheck, setPasswordCheck] = useState('');
-  const [id, setId] = useState('');
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignupFormValues>({
+    resolver: zodResolver(SignupSchema),
+    mode: 'onChange',
+  });
+
+  const onSubmit = (data: SignupFormValues) => {
+    console.log('제출된 값:', data);
+    onNext?.();
+  };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex w-full flex-col items-center justify-center"
+    >
       <div
         className={`flex w-full flex-col items-start gap-[30px] ${
           isMobile ? 'w-full max-w-[393px] px-4' : 'w-full max-w-[424px]'
@@ -23,34 +64,86 @@ const Signup = ({ onNext }: SignupProps) => {
         <div className="mb-[6px] text-gray-900 font-T01-B">회원가입하기</div>
 
         <div className="relative w-full">
-          <Input
-            inputtitle="아이디"
-            placeholder="아이디를 입력하세요"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-            className="h-[68px] w-full pr-[84px] font-B02-M"
-            undertext="4-20자/영문,숫자 조합"
+          <Controller
+            name="id"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <Input
+                {...field}
+                inputtitle="아이디"
+                placeholder="아이디를 입력하세요"
+                className="h-[68px] w-full pr-[84px] font-B02-M"
+                undertext={errors.id?.message || '4-20자/영문,숫자 조합'}
+                undertextClassName={
+                  errors.id?.message ? 'text-warning' : 'text-gray-500'
+                }
+              />
+            )}
           />
-          <button className="absolute right-4 top-[52%] h-[38px] -translate-y-1/2 cursor-pointer rounded-[10px] bg-gray-400 px-[10px] py-2 text-white font-B03-M">
+          <button
+            type="button"
+            className="absolute right-4 top-[52%] h-[38px] -translate-y-1/2 cursor-pointer rounded-[10px] bg-gray-400 px-[10px] py-2 text-white font-B03-M"
+          >
             중복확인
           </button>
         </div>
 
-        <Input
-          inputtitle="비밀번호"
-          placeholder="비밀번호를 입력하세요"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="h-[68px] w-full font-B02-M"
-          undertext="8~16자/영문 대소문자,숫자,특수문자 조합"
+        <Controller
+          name="password"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <Input
+              {...field}
+              inputtitle="비밀번호"
+              placeholder="비밀번호를 입력하세요"
+              isPassword
+              className={`h-[68px] w-full font-B02-M ${
+                errors.password ? 'border-warning' : ''
+              }`}
+              undertext={
+                errors.password?.message ||
+                '8~16자/영문 대소문자,숫자,특수문자 조합'
+              }
+              undertextClassName={
+                errors.password ? 'text-warning' : 'text-gray-500'
+              }
+            />
+          )}
         />
 
-        <Input
-          inputtitle="비밀번호 확인"
-          placeholder="비밀번호를 입력하세요"
-          value={passwordcheck}
-          onChange={(e) => setPasswordCheck(e.target.value)}
-          className="h-[68px] w-full font-B02-M"
+        <Controller
+          name="passwordcheck"
+          control={control}
+          defaultValue=""
+          render={({ field }) => {
+            const passwordValue = control._formValues.password;
+            const isMatch = field.value && passwordValue === field.value;
+            const hasError = !!errors.passwordcheck;
+
+            return (
+              <Input
+                {...field}
+                inputtitle="비밀번호 확인"
+                placeholder="비밀번호를 다시 입력하세요"
+                isPassword
+                className={`h-[68px] w-full font-B02-M ${
+                  hasError ? 'border-warning' : ''
+                }`}
+                undertext={
+                  hasError
+                    ? errors.passwordcheck?.message
+                    : isMatch
+                      ? '비밀번호가 일치합니다'
+                      : ''
+                }
+                undertextClassName={
+                  hasError ? 'text-warning' : isMatch ? 'text-success' : ''
+                }
+              />
+            );
+          }}
         />
       </div>
 
@@ -70,7 +163,7 @@ const Signup = ({ onNext }: SignupProps) => {
           }}
         />
       </div>
-    </div>
+    </form>
   );
 };
 
