@@ -1,3 +1,4 @@
+import FloatingButton from '@common/FloatingButton';
 import Header from '@common/Header';
 import { Outlet } from 'react-router-dom';
 
@@ -9,6 +10,7 @@ const ShowLayout = () => {
       </div>
       <main className="w-full">
         <Outlet />
+        <FloatingButton />
       </main>
     </div>
   );

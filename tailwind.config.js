@@ -32,7 +32,7 @@ export default {
         warning: '#FF262A',
         success: '#0075EB',
       },
-      dropShadow: {
+      boxShadow: {
         shadow1: [
           '0px 4px 8px rgba(34, 34, 34, 0.04)',
           '4px 0px 8px rgba(0, 0, 0, 0.04)',
@@ -44,6 +44,11 @@ export default {
         shadow3: [
           '0px 8px 12px rgba(34, 34, 34, 0.08)',
           '8px 0px 12px rgba(34, 34, 34, 0.08)',
+        ].join(', '),
+        shadow4: [
+          '-8px 0px 40px 0px rgba(34, 34, 34, 0.10)',
+          '8px 0px 40px 0px rgba(34, 34, 34, 0.10)',
+          '0px 8px 40px 0px rgba(34, 34, 34, 0.10)',
         ].join(', '),
       },
     },
@@ -145,6 +150,13 @@ export default {
           '@apply font-default font-normal': {},
           fontSize: '12px',
           lineHeight: 1.3,
+        },
+        '.no-scrollbar': {
+          '-ms-overflow-style': 'none',
+          'scrollbar-width': 'none',
+        },
+        '.no-scrollbar::-webkit-scrollbar': {
+          display: 'none',
         },
       });
     },

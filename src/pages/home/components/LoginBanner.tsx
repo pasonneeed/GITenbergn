@@ -1,6 +1,6 @@
 import { HomeBackImage, HomeCard } from './HomeImage';
 import MyDreamArrow from '@assets/icons/myDreamarrow.svg?react';
-import Bell from '@assets/icons/Bell.svg?react';
+// import Bell from '@assets/icons/Bell.svg?react';
 import Arrow from '@assets/icons/arrow.svg?react';
 import { useState } from 'react';
 import ReadyTab from './tab/ReadyTab';
@@ -53,7 +53,7 @@ const LoginBanner = ({ regionName = '대전 서구' }: LoginBannerProps) => {
                 </div>
               </div>
 
-              <div className="absolute bottom-2 left-[7.4px] flex h-[258px] w-[772.4px] rounded-b-[30px] bg-white drop-shadow-shadow2">
+              <div className="shadow-shadow2 absolute bottom-2 left-[7.4px] flex h-[258px] w-[772.4px] rounded-b-[30px] bg-white">
                 <div className="absolute -top-[33px] left-[30px] flex items-center justify-center border-b-[3px] border-white">
                   {tabs.map((tab) => (
                     <button
@@ -75,7 +75,7 @@ const LoginBanner = ({ regionName = '대전 서구' }: LoginBannerProps) => {
 
             <div className="flex h-[465px] w-[384px] flex-col items-start rounded-[30px] border border-gray-300 bg-white px-[30px] py-[40px]">
               <div className="flex w-full flex-row items-start justify-between">
-                <Bell />
+                {/* <Bell /> */}
                 <div className="flex flex-row items-center">
                   <div className="text-gray-500 font-B02-SB">더보기 </div>
                   <Arrow />
