@@ -1,5 +1,7 @@
 import Filter from '@common/Filter'; // 실제 필터 컴포넌트 경로로 맞춰주세요
 import MagnifyIcon from '@assets/images/reading.png';
+import RecruitCard from '@common/RecruitCard.tsx';
+import RecruitDummy, { RecruitItem } from '@utils/data/search/searchDummy.ts';
 
 const JobSearchPage = () => {
   return (
@@ -22,7 +24,13 @@ const JobSearchPage = () => {
         <Filter />
       </div>
 
-      <div className="container mx-auto px-4 pt-8 md:px-0"></div>
+      <div className="container mx-auto px-4 pt-8 md:px-0">
+        <div className="grid grid-cols-3 gap-6">
+          {RecruitDummy.map((item: RecruitItem) => (
+            <RecruitCard key={item.id} item={item} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
