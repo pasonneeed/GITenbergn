@@ -143,7 +143,7 @@ const Signup = ({ onNext }: SignupProps) => {
           control={control}
           defaultValue=""
           render={({ field }) => {
-            const passwordValue = getValues('password'); // 여기서도 getValues 사용 가능
+            const passwordValue = getValues('password');
             const isMatch = field.value && passwordValue === field.value;
             const hasError = !!errors.passwordcheck;
 
