@@ -33,7 +33,7 @@ const LoginForm = () => {
           )}
         />
         {errors.id && (
-          <p className="text-sm text-red-500">{errors.id.message}</p>
+          <p className="text-warning text-sm">{errors.id.message}</p>
         )}
       </div>
 
@@ -53,7 +53,7 @@ const LoginForm = () => {
           )}
         />
         {errors.password && (
-          <p className="text-sm text-red-500">{errors.password.message}</p>
+          <p className="text-warning text-sm">{errors.password.message}</p>
         )}
       </div>
 
