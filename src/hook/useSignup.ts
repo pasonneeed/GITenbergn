@@ -23,6 +23,13 @@ const duplicateId = async (loginId: string) => {
   return response.data;
 };
 
+const duplicateNickname = async (nickname: string) => {
+  const response = await api.get(`/v1/member/auth/check-nickname`, {
+    params: { nickname },
+  });
+  return response.data;
+};
+
 export const useSignupMutation = () => {
   const navigate = useNavigate();
 
@@ -37,5 +44,11 @@ export const useSignupMutation = () => {
 export const useDuplicateIdMutation = () => {
   return useMutation({
     mutationFn: duplicateId,
+  });
+};
+
+export const useDuplicateNicknameMutation = () => {
+  return useMutation({
+    mutationFn: duplicateNickname,
   });
 };
