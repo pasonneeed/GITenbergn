@@ -30,11 +30,49 @@ const DateInput = forwardRef(
 
     const onInput = (e: React.ChangeEvent<HTMLInputElement>) => {
       const v = e.target.value;
-      if (/^[0-9/]{0,10}$/.test(v)) {
+
+      if (!/^[0-9/]{0,10}$/.test(v)) return;
+
+      const parts = v.split('/');
+
+      if (v.length < 10) {
         onChange(v);
-        if (name === 'startDate' && v.length === 10) {
-          autoFocusTo?.current?.focus();
-        }
+        return;
+      }
+
+      const [y, m, d] = parts;
+      if (y.length !== 4 || m.length !== 2 || d.length !== 2) {
+        return;
+      }
+
+      const year = Number(y);
+      const month = Number(m);
+      const day = Number(d);
+
+      if (month < 1 || month > 12) {
+        onChange(`${y}/`);
+        return;
+      }
+
+      if (day < 1 || day > 31) {
+        onChange(`${y}/${m}/`);
+        return;
+      }
+
+      const date = new Date(year, month - 1, day);
+      const isValidDate =
+        date.getFullYear() === year &&
+        date.getMonth() === month - 1 &&
+        date.getDate() === day;
+
+      if (!isValidDate) {
+        onChange(`${y}/${m}/`);
+        return;
+      }
+
+      onChange(v);
+      if (name === 'startDate') {
+        autoFocusTo?.current?.focus();
       }
     };
 
