@@ -1,5 +1,5 @@
 import Filter from '@pages/learning/components/Filter.tsx';
-import PencilIcon from '@assets/icons/pencil.svg';
+import PencilIcon from '@assets/images/writing.png';
 import LearningDummy, { LearningItem } from '@utils/data/learn/learnDummy.ts';
 import Footer from '@common/Footer.tsx';
 import LearningCard from '@pages/learning/components/LearningCard.tsx';
