@@ -8,6 +8,8 @@ import {
   SignupSchema,
 } from '@validation/signup/SignupSchema';
 import { useSignupStore } from '@store/useSignupStore';
+import { useDuplicateIdMutation } from '@hook/useSignup';
+import { useState } from 'react';
 
 interface SignupProps {
   onNext: () => void;
@@ -16,10 +18,16 @@ interface SignupProps {
 const Signup = ({ onNext }: SignupProps) => {
   const isMobile = useMediaQuery();
   const setField = useSignupStore((state) => state.setField);
+  const { mutate: checkDuplicateId } = useDuplicateIdMutation();
+  const [duplicateMessage, setDuplicateMessage] = useState<string | null>(null);
+  const [duplicateSuccess, setDuplicateSuccess] = useState<boolean | null>(
+    null
+  );
 
   const {
     control,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<SignupFormValues>({
     resolver: zodResolver(SignupSchema),
@@ -33,6 +41,26 @@ const Signup = ({ onNext }: SignupProps) => {
     onNext();
   };
 
+  const handleDuplicateCheck = () => {
+    const loginId = getValues('loginId');
+    if (!loginId) return;
+
+    checkDuplicateId(loginId, {
+      onSuccess: (data) => {
+        if (data?.duplicated) {
+          setDuplicateSuccess(false);
+          setDuplicateMessage('이미 사용 중인 아이디입니다.');
+        } else {
+          setDuplicateSuccess(true);
+          setDuplicateMessage('사용 가능한 아이디입니다');
+        }
+      },
+      onError: () => {
+        setDuplicateSuccess(false);
+        setDuplicateMessage('이미 사용 중인 아이디입니다.');
+      },
+    });
+  };
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -56,9 +84,19 @@ const Signup = ({ onNext }: SignupProps) => {
                 inputtitle="아이디"
                 placeholder="아이디를 입력하세요"
                 className="h-[68px] w-full pr-[84px] font-B02-M"
-                undertext={errors.loginId?.message || '4-20자/영문,숫자 조합'}
+                undertext={
+                  errors.loginId?.message
+                    ? errors.loginId.message
+                    : duplicateMessage || '4-20자/영문,숫자 조합'
+                }
                 undertextClassName={
-                  errors.loginId?.message ? 'text-warning' : 'text-gray-500'
+                  errors.loginId?.message
+                    ? 'text-warning'
+                    : duplicateSuccess === true
+                      ? 'text-success'
+                      : duplicateSuccess === false
+                        ? 'text-warning'
+                        : 'text-gray-500'
                 }
                 minLength={4}
                 maxLength={20}
@@ -67,6 +105,7 @@ const Signup = ({ onNext }: SignupProps) => {
           />
           <button
             type="button"
+            onClick={handleDuplicateCheck}
             className="absolute right-4 top-[52%] h-[38px] -translate-y-1/2 cursor-pointer rounded-[10px] bg-gray-400 px-[10px] py-2 text-white font-B03-M"
           >
             중복확인
@@ -104,7 +143,7 @@ const Signup = ({ onNext }: SignupProps) => {
           control={control}
           defaultValue=""
           render={({ field }) => {
-            const passwordValue = control._formValues.password;
+            const passwordValue = getValues('password'); // 여기서도 getValues 사용 가능
             const isMatch = field.value && passwordValue === field.value;
             const hasError = !!errors.passwordcheck;
 

@@ -16,6 +16,13 @@ const signupUser = async (data: SignupRequest) => {
   return response.data;
 };
 
+const duplicateId = async (loginId: string) => {
+  const response = await api.get(`/v1/member/auth/check-id`, {
+    params: { loginId },
+  });
+  return response.data;
+};
+
 export const useSignupMutation = () => {
   const navigate = useNavigate();
 
@@ -24,5 +31,11 @@ export const useSignupMutation = () => {
     onSuccess: () => {
       navigate('/login');
     },
+  });
+};
+
+export const useDuplicateIdMutation = () => {
+  return useMutation({
+    mutationFn: duplicateId,
   });
 };
