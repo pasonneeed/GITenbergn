@@ -7,6 +7,7 @@ import {
   SignupFormValues,
   SignupSchema,
 } from '@validation/signup/SignupSchema';
+import { useSignupStore } from '@store/useSignupStore';
 
 interface SignupProps {
   onNext: () => void;
@@ -14,6 +15,7 @@ interface SignupProps {
 
 const Signup = ({ onNext }: SignupProps) => {
   const isMobile = useMediaQuery();
+  const setField = useSignupStore((state) => state.setField);
 
   const {
     control,
@@ -26,6 +28,8 @@ const Signup = ({ onNext }: SignupProps) => {
 
   const onSubmit = (data: SignupFormValues) => {
     console.log('제출된 값:', data);
+    setField('loginId', data.loginId);
+    setField('password', data.password);
     onNext();
   };
 
@@ -43,7 +47,7 @@ const Signup = ({ onNext }: SignupProps) => {
 
         <div className="relative w-full">
           <Controller
-            name="id"
+            name="loginId"
             control={control}
             defaultValue=""
             render={({ field }) => (
@@ -52,9 +56,9 @@ const Signup = ({ onNext }: SignupProps) => {
                 inputtitle="아이디"
                 placeholder="아이디를 입력하세요"
                 className="h-[68px] w-full pr-[84px] font-B02-M"
-                undertext={errors.id?.message || '4-20자/영문,숫자 조합'}
+                undertext={errors.loginId?.message || '4-20자/영문,숫자 조합'}
                 undertextClassName={
-                  errors.id?.message ? 'text-warning' : 'text-gray-500'
+                  errors.loginId?.message ? 'text-warning' : 'text-gray-500'
                 }
                 minLength={4}
                 maxLength={20}
@@ -139,10 +143,8 @@ const Signup = ({ onNext }: SignupProps) => {
         <Button
           text="다음"
           color="primary"
+          type="submit"
           className="h-[60px] w-full font-T05-SB"
-          onClick={() => {
-            onNext();
-          }}
         />
       </div>
     </form>

@@ -10,6 +10,8 @@ import {
   Signup2FormValues,
   Signup2Schema,
 } from '@validation/signup/SignupSchema';
+import { useSignupStore } from '@store/useSignupStore';
+import { signupUser } from '@hook/useSignup';
 
 const Signup2 = () => {
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
@@ -20,6 +22,7 @@ const Signup2 = () => {
     { label: '여자', value: 'female' },
     { label: '남자', value: 'male' },
   ];
+  const { loginId, password, gender } = useSignupStore();
 
   const {
     handleSubmit,
@@ -34,8 +37,24 @@ const Signup2 = () => {
     mode: 'onChange',
   });
 
-  const onSubmit = (data: Signup2FormValues) => {
-    console.log('폼 데이터:', data, '성별:', selectedGender);
+  const onSubmit = async (data: Signup2FormValues) => {
+    try {
+      const requestData = {
+        loginId,
+        password,
+        nickName: data.nickname,
+        birthDate: data.date,
+        gender: (selectedGender ?? gender)?.toUpperCase(),
+      };
+
+      await signupUser(requestData);
+      console.log(requestData);
+      // console.log('보내는 지역코드:', requestData.add);
+      console.log('회원가입 완료!');
+    } catch (error) {
+      console.error('회원가입 실패:', error);
+      console.log('회원가입에 실패했습니다.');
+    }
   };
 
   return (
