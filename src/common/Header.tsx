@@ -10,7 +10,7 @@ interface ShowProps {
 const NavItems = [
   { label: '마이드림', path: '/' },
   { label: '일자리 찾기', path: '/jobsearch' },
-  { label: '배움터 찾기', path: '/' },
+  { label: '배움터 찾기', path: '/learning' },
   { label: '직업탐색', path: '/jobfound' },
 ];
 

@@ -7,6 +7,7 @@ import OnBoardingPage from '@pages/onboard/OnBoardingPage.tsx';
 import Home from '@pages/home/Home';
 import JobRecommendPage from '@pages/jobRecommend/JobRecommendPage.tsx';
 import JobSearchPage from '@pages/jobSearch/JobSearchPage.tsx';
+import LearningPage from '@pages/learning/LearningPage.tsx';
 import JobFound from '@pages/jobfound/JobFound';
 
 const Router = () => {
@@ -23,6 +24,7 @@ const Router = () => {
           <Route path="/onboard" element={<OnBoardingPage />} />
           <Route path="/jobrecommend" element={<JobRecommendPage />} />
           <Route path="/jobsearch" element={<JobSearchPage />} />
+          <Route path="/learning" element={<LearningPage />} />
           <Route path="/jobfound" element={<JobFound />} />
         </Route>
       </Routes>

@@ -1,10 +1,10 @@
 import { create } from 'zustand';
-
 type FilterState = {
   job: string;
   location: string;
   startDate: string;
   endDate: string;
+  trainingCourse: string;
   require: string; //자격증 필요여부
   workTime: string;
   bodyActivity: string;
@@ -12,11 +12,17 @@ type FilterState = {
 
 type FilterActions = {
   setSelection: (
-    key: 'job' | 'location' | 'require' | 'workTime' | 'bodyActivity',
+    key:
+      | 'job'
+      | 'location'
+      | 'require'
+      | 'workTime'
+      | 'bodyActivity'
+      | 'trainingCourse',
     value: string
   ) => void;
   updateDate: (key: 'startDate' | 'endDate', value: string) => void;
-  removeTag: (type: 'job' | 'location' | 'date') => void;
+  removeTag: (type: 'job' | 'location' | 'date' | 'trainingCourse') => void;
   reset: () => void;
 };
 
@@ -25,6 +31,7 @@ export const useFilterStore = create<FilterState & FilterActions>((set) => ({
   location: '',
   startDate: '',
   endDate: '',
+  trainingCourse: '',
   require: '',
   workTime: '',
   bodyActivity: '',
@@ -55,6 +62,7 @@ export const useFilterStore = create<FilterState & FilterActions>((set) => ({
       location: '',
       startDate: '',
       endDate: '',
+      trainingCourse: '',
       require: '',
       workTime: '',
       bodyActivity: '',
