@@ -1,4 +1,4 @@
-import Filter from '@pages/jobSearch/components/Filter.tsx'; // 실제 필터 컴포넌트 경로로 맞춰주세요
+import Filter from '@pages/jobSearch/components/Filter.tsx';
 import MagnifyIcon from '@assets/images/reading.png';
 import RecruitCard from '@common/RecruitCard.tsx';
 import RecruitDummy, { RecruitItem } from '@utils/data/search/searchDummy.ts';
