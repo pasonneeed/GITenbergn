@@ -8,8 +8,8 @@ const JobSearchPage = () => {
   return (
     <div className="flex flex-col">
       <div className="bg-gray-100">
-        <div className="container mx-auto mb-8 flex flex-col items-start gap-4 py-16 sm:py-24 lg:py-32">
-          <img src={MagnifyIcon} alt="돋보기" />
+        <div className="container mx-auto mb-16 flex flex-col items-start gap-4 py-20">
+          <img className={'h-12 w-12'} src={MagnifyIcon} alt="돋보기" />
           <div className="flex flex-col gap-4">
             <p className="text-gray-500 font-B03-M">일자리 찾기</p>
             <h1 className="text-gray-900 font-T01-B">
