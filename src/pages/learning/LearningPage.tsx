@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Filter from '@pages/learning/components/Filter.tsx';
-import PencilIcon from '@assets/images/writing.png';
+import PencilIcon from '@assets/images/learn.webp';
+import Img from '@assets/images/illustration_2.webp';
 import LearningDummy, { LearningItem } from '@utils/data/learn/learnDummy.ts';
 import Footer from '@common/Footer.tsx';
 import LearningCard from '@pages/learning/components/LearningCard.tsx';
@@ -15,15 +16,21 @@ const LearningPage = () => {
 
   return (
     <div className="flex flex-col">
-      <div className="bg-gray-100">
-        <div className="container mx-auto mb-16 flex flex-col items-start gap-4 py-20">
-          <img className="h-12 w-12" src={PencilIcon} alt="연필" />
+      <div className="bg-[#36369A]">
+        <div className="container mx-auto mb-16 flex flex-col items-start gap-4 py-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex flex-col gap-4">
-            <p className="text-gray-500 font-B03-M">일자리 찾기</p>
-            <h1 className="text-gray-900 font-T01-B">
+            <img className="h-12 w-12" src={PencilIcon} alt="연필" />
+            <p className="text-white font-B03-M">배움터 찾기</p>
+            <h1 className="text-white font-T01-B">
               꿈을 향한 도약, 배움터를 찾아보세요
             </h1>
           </div>
+
+          <img
+            className="h-auto max-w-xs lg:max-w-sm"
+            src={Img}
+            alt="일자리 이미지"
+          />
         </div>
       </div>
 
