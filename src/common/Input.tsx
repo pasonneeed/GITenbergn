@@ -14,6 +14,7 @@ interface InputProps
   > {
   inputtitle?: string;
   undertext?: string;
+  undertextClassName?: string;
   state?: State;
   isPassword?: boolean;
   value: string;
@@ -27,6 +28,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       className,
       inputtitle,
       undertext,
+      undertextClassName,
       state = 'default',
       isPassword = false,
       value,
@@ -98,9 +100,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             </div>
           )}
         </div>
-
         {undertext && (
-          <span className="text-gray-500 font-B03-M">{undertext}</span>
+          <span className={`text-gray-500 font-B03-M ${undertextClassName}`}>
+            {undertext}
+          </span>
         )}
       </div>
     );
