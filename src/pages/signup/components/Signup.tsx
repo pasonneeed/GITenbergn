@@ -9,7 +9,7 @@ import {
 } from '@validation/signup/SignupSchema';
 
 interface SignupProps {
-  onNext: () => void | undefined;
+  onNext: () => void;
 }
 
 const Signup = ({ onNext }: SignupProps) => {
