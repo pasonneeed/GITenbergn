@@ -54,35 +54,35 @@ const Card = ({
           isHovered ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <h4 className="mb-6 text-2xl text-gray-900 font-T01-B">
+        <h4 className="mb-6 text-gray-900 font-T01-B">
           <span>{title}</span>
-          <div className="block">추천 이유</div>
+          <div>추천 이유</div>
         </h4>
-        <div className="space-y-4 text-sm text-gray-700 font-B02-M">
+        <div className="space-y-4">
           <div>
-            <strong className="font-semibold text-black">성향</strong>
-            <p>
+            <strong className="text-black font-B03-B">성향</strong>
+            <p className="mt-2 text-gray-500 font-B03-M">
               사람을 직접 돕고 함께 일하는 걸 선호하는 ‘{nickname}’ 님과 잘
               맞아요.
             </p>
           </div>
           <div>
-            <strong className="font-semibold text-black">강점</strong>
-            <p>
+            <strong className="text-black font-B03-B">강점</strong>
+            <p className="mt-2 text-gray-500 font-B03-M">
               주변에서 말을 잘한다는 칭찬을 자주 듣는 ‘{nickname}’ 님은 따뜻한
               소통에 강점을 지녔어요.
             </p>
           </div>
           <div>
-            <strong className="font-semibold text-black">조건</strong>
-            <p>{reason}</p>
+            <strong className="text-black font-B03-B">조건</strong>
+            <p className="mt-2 text-gray-500 font-B03-M">{reason}</p>
           </div>
         </div>
         <div className="mt-6 flex justify-center gap-6">
-          <button className="rounded-[10px] bg-purple-100 px-10 py-4 text-sm font-semibold text-purple-500">
+          <button className="rounded-[12px] bg-purple-100 px-10 py-4 text-purple-500 font-B03-SB">
             담기
           </button>
-          <button className="rounded-[10px] bg-purple-500 px-14 py-4 text-sm font-semibold text-white">
+          <button className="rounded-[12px] bg-purple-500 px-14 py-4 text-white font-B03-SB">
             상세정보 보기
           </button>
         </div>
