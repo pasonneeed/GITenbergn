@@ -5,15 +5,33 @@ type FilterState = {
   startDate: string;
   endDate: string;
   trainingCourse: string;
+  require: string; //자격증 필요여부
+  workTime: string;
+  bodyActivity: string;
 };
 
 type FilterActions = {
   setSelection: (
-    key: 'job' | 'location' | 'trainingCourse',
+    key:
+      | 'job'
+      | 'location'
+      | 'require'
+      | 'workTime'
+      | 'bodyActivity'
+      | 'trainingCourse',
     value: string
   ) => void;
   updateDate: (key: 'startDate' | 'endDate', value: string) => void;
-  removeTag: (type: 'job' | 'location' | 'date' | 'trainingCourse') => void;
+  removeTag: (
+    type:
+      | 'job'
+      | 'location'
+      | 'date'
+      | 'trainingCourse'
+      | 'require'
+      | 'workTime'
+      | 'bodyActivity'
+  ) => void;
   reset: () => void;
 };
 
@@ -23,6 +41,9 @@ export const useFilterStore = create<FilterState & FilterActions>((set) => ({
   startDate: '',
   endDate: '',
   trainingCourse: '',
+  require: '',
+  workTime: '',
+  bodyActivity: '',
 
   setSelection: (key, value) =>
     set((state) => ({
@@ -51,5 +72,8 @@ export const useFilterStore = create<FilterState & FilterActions>((set) => ({
       startDate: '',
       endDate: '',
       trainingCourse: '',
+      require: '',
+      workTime: '',
+      bodyActivity: '',
     }),
 }));

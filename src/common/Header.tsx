@@ -11,7 +11,7 @@ const NavItems = [
   { label: '마이드림', path: '/' },
   { label: '일자리 찾기', path: '/jobsearch' },
   { label: '배움터 찾기', path: '/learning' },
-  { label: '직업탐색', path: '/' },
+  { label: '직업탐색', path: '/jobfound' },
 ];
 
 const Header = ({ type }: ShowProps) => {
@@ -21,7 +21,7 @@ const Header = ({ type }: ShowProps) => {
   const isLoggedIn = Boolean(accessToken);
 
   return (
-    <div className="z-100 fixed left-0 top-0 flex h-20 w-full items-center justify-between border-b border-gray-200 bg-white px-[120px] py-5">
+    <div className="fixed left-0 top-0 z-[9999] flex h-20 w-full items-center justify-between border-b border-gray-200 bg-white px-[120px] py-5">
       <div className="flex flex-row items-center gap-5">
         <Logo />
         {NavItems.map(({ label, path }) => (
