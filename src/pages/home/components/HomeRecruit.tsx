@@ -19,9 +19,9 @@ const HomeRecruit = () => {
       <div className="grid grid-cols-3 gap-6">
         {[...Recruit]
           .sort((a, b) => parseInt(a.time) - parseInt(b.time))
-          .map((item, index) => (
+          .map((item, id) => (
             <div
-              key={index}
+              key={id}
               className="flex h-auto w-[384px] flex-col items-start rounded-[30px] border-[1.2px] border-gray-300 p-[30px]"
             >
               <div className="flex w-full flex-col items-end">

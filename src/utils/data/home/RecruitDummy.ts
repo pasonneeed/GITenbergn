@@ -1,5 +1,6 @@
 const Recruit = [
   {
+    id: 1,
     company: '(주)이아소실버케어',
     job: '요양보호사',
     time: '2',
@@ -7,6 +8,7 @@ const Recruit = [
     interest: '4',
   },
   {
+    id: 2,
     company: '(주)이아소실버케어',
     job: '간호조무사',
     time: '0',
@@ -14,6 +16,7 @@ const Recruit = [
     interest: '4',
   },
   {
+    id: 3,
     company: '사랑노인전문요양원',
     job: '물리치료사',
     time: '3',
@@ -21,6 +24,7 @@ const Recruit = [
     interest: '5',
   },
   {
+    id: 4,
     company: '푸른빛재가센터',
     job: '요양보호사',
     time: '5',
@@ -28,6 +32,7 @@ const Recruit = [
     interest: '3',
   },
   {
+    id: 5,
     company: '행복한우리요양원',
     job: '영양사',
     time: '4',
@@ -35,6 +40,7 @@ const Recruit = [
     interest: '2',
   },
   {
+    id: 6,
     company: '소망복지센터',
     job: '사회복지사',
     time: '1',
