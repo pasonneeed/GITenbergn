@@ -31,7 +31,8 @@ const AddJobModal = ({ onClose }: AddJobModalProps) => {
           <Button
             text="계속 직업 탐색하기"
             color="secondary"
-            type="submit"
+            type="button"
+            onClick={onClose}
             className="mt-[25px] h-[62px] w-full border border-purple-500 bg-white font-T05-SB"
           />
           <Button
