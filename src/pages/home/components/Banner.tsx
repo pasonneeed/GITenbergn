@@ -16,7 +16,7 @@ const Banner = () => {
             <div className="relative">
               <HomeCard />
 
-              <div className="absolute right-6 top-[7px] z-50 flex cursor-pointer items-center space-x-3">
+              <div className="absolute right-6 top-[14.5px] z-50 flex cursor-pointer items-center space-x-3">
                 <span className="text-gray-500 font-B02-SB">마이드림 가기</span>
                 <MyDreamArrow />
               </div>
