@@ -40,7 +40,7 @@ const districtMap: Record<string, string[]> = {
   울산: ['남구', '중구', '동구', '북구'],
 };
 
-export default function Filter() {
+const Filter = () => {
   const {
     job,
     location,
@@ -166,4 +166,5 @@ export default function Filter() {
       </div>
     </div>
   );
-}
+};
+export default Filter;
