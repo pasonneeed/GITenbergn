@@ -18,7 +18,7 @@ const LoginPage = () => {
                 지금 두드림에서
               </div>
             </div>
-            {/*api 연동 안해놔서 임시로 console.log 적어놨음. 추후 수정예정*/}
+
             <LoginForm />
 
             <Divider />
