@@ -10,5 +10,8 @@ reviews:
   auto_review:
     enabled: true
     drafts: false
+    branches:
+      - main
+      - develop
 chat:
   auto_reply: true
