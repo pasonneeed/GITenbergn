@@ -74,7 +74,7 @@ const Filter = () => {
     if (trainingCourse)
       t.push({ label: trainingCourse, type: 'trainingCourse' });
     return t;
-  }, [job, location, startDate, endDate]);
+  }, [job, location, startDate, endDate, trainingCourse]);
 
   const handleCitySelect = (city: string) => {
     setTempCity(city);
