@@ -5,6 +5,7 @@ import HideLayout from '@outlet/HideLayout';
 import ShowLayout from '@outlet/ShowLayout';
 import OnBoardingPage from '@pages/onboard/OnBoardingPage.tsx';
 import Home from '@pages/home/Home';
+import JobRecommendPage from '@pages/jobRecommand/JobRecommandPage.tsx';
 
 const Router = () => {
   return (
@@ -18,6 +19,7 @@ const Router = () => {
         <Route element={<ShowLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/onboard" element={<OnBoardingPage />} />
+          <Route path="/jobrecommend" element={<JobRecommendPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
