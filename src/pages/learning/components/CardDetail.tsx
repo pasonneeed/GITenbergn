@@ -16,9 +16,15 @@ const CardDetail = ({ item, onClose }: CardDetailProps) => {
   ];
 
   return (
-    <div className="relative w-full max-w-2xl rounded-2xl bg-white px-6 py-8">
+    <div
+      className="relative w-full max-w-2xl rounded-2xl bg-white px-6 py-8"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
       <button
         className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"
+        aria-label="닫기"
         onClick={onClose}
       >
         <CancelIcon className="h-8 w-8" />
@@ -31,7 +37,9 @@ const CardDetail = ({ item, onClose }: CardDetailProps) => {
       </div>
 
       <p className="mt-8 text-gray-500 font-B01-SB">{item.company}</p>
-      <h2 className="mt-2 text-gray-900 font-T02-B">{item.title}</h2>
+      <h2 className="mt-2 text-gray-900 font-T02-B" id="modal-title">
+        {item.title}
+      </h2>
 
       <div className="mt-8 space-y-3 rounded-xl bg-gray-50 px-6 py-5 text-gray-600 font-B01-M">
         {details.map((detail, idx) => (

@@ -49,7 +49,14 @@ const LearningPage = () => {
       </div>
       <Footer />
       {selectedCardId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+          role="dialog"
+          aria-modal="true"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setCardId(0);
+          }}
+        >
           <CardDetail item={selectedCardId} onClose={() => setCardId(0)} />
         </div>
       )}
