@@ -89,35 +89,14 @@ export default function Filter() {
 
   return (
     <div className="w-full rounded-xl bg-white p-6 shadow-lg">
-      {/* 1) 필터 초기화 */}
       <div className="mb-4 flex justify-end">
         <ResetButton onClick={handleResetAll} />
       </div>
 
-      {/* 2) 빈 공간 */}
-      <div className="h-4" />
-
-      {/* 3) 첫째 줄: 라벨들 */}
-      <div className="flex flex-col gap-4 md:flex-row">
-        <div className="flex-1">
-          <label className="text-sm font-semibold text-gray-900">직업</label>
-        </div>
-        <div className="flex-1">
-          <label className="text-sm font-semibold text-gray-900">지역</label>
-        </div>
-        <div className="flex-1">
-          <label className="text-sm font-semibold text-gray-900">
-            공고 날짜
-          </label>
-        </div>
-      </div>
-
-      {/* 4) 컨트롤 행 */}
-      {/* 4) 컨트롤 행 */}
       <div className="mt-2 flex flex-col gap-4 md:flex-row">
-        {/* 직업 드롭다운 */}
-        <div className="flex-1">
+        <div className="basis-1/4">
           <DropDown
+            title={'직업'}
             placeholder="직업 선택"
             options={jobOptions}
             value={job}
@@ -125,34 +104,32 @@ export default function Filter() {
           />
         </div>
 
-        {/* 지역 드롭다운 */}
-        <div className="flex-1">
-          {locStep === 'city' ? (
-            <DropDown
-              placeholder="지역 선택"
-              options={cityOptions}
-              value={selectedCity}
-              onSelect={handleCitySelect}
-              keepOpenOnSelect
-            />
-          ) : (
-            <DropDown
-              placeholder={`${tempCity}의 구 선택`}
-              options={districtMap[tempCity] || []}
-              value={selectedDistrict}
-              onSelect={handleDistrictSelect}
-              backButton={{
-                label: '← 시 선택으로 돌아가기',
-                onClick: () => setLocStep('city'),
-              }}
-            />
-          )}
-        </div>
+        <DropDown
+          title="지역"
+          placeholder={'지역 선택'}
+          options={
+            locStep === 'city' ? cityOptions : (districtMap[tempCity] ?? [])
+          }
+          value={locStep === 'city' ? selectedCity : selectedDistrict}
+          onSelect={(v) => {
+            if (locStep === 'city') handleCitySelect(v);
+            else handleDistrictSelect(v);
+          }}
+          backButton={
+            locStep === 'district'
+              ? {
+                  label: `${tempCity}`,
+                  onClick: () => setLocStep('city'),
+                }
+              : undefined
+          }
+          keepOpenOnSelect={locStep === 'city'}
+        />
 
-        {/* 공고 날짜 입력 영역 */}
-        <div className="flex flex-1 gap-2">
-          <div className="w-1/2">
+        <div className="flex flex-1 items-end gap-2">
+          <div className="basis-1/2">
             <DateInput
+              title={'공고 날짜'}
               label="공고 시작일"
               name="startDate"
               value={startDate}
@@ -160,7 +137,9 @@ export default function Filter() {
               autoFocusTo={endDateRef}
             />
           </div>
-          <div className="w-1/2">
+          <span className="pb-2 text-gray-400">~</span>
+          <div className="basis-1/2">
+            <div className="h-6" />
             <DateInput
               ref={endDateRef}
               label="공고 마감일"
@@ -172,7 +151,6 @@ export default function Filter() {
         </div>
       </div>
 
-      {/* 6) 선택된 태그 */}
       <div className="mt-6 flex flex-wrap gap-2">
         {tags.map((tag) => (
           <span
