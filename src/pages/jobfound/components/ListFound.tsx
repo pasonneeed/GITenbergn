@@ -1,7 +1,11 @@
 import PlusIcon from '@assets/icons/plus.svg?react';
+import Button from '@common/Button';
+import AddJobModal from '@common/modal/AddJobModal';
 import FoundJobs from '@utils/data/jobfound/JobFoundDummy';
+import { useState } from 'react';
 
 const ListFound = () => {
+  const [isModal, setIsModal] = useState<Boolean>(false);
   return (
     <div className="grid grid-cols-3 gap-6 px-9 py-[60px]">
       {FoundJobs.map((item) => {
@@ -39,7 +43,7 @@ const ListFound = () => {
                   {userCount > maxUsers && (
                     <div className="my-[5px] flex h-7 w-9 items-center justify-center rounded-full bg-black p-[6px]">
                       <div className="flex flex-row items-center justify-center gap-[2px]">
-                        <div className="mt-[2px] text-white font-C01-M">
+                        <div className="text-white font-C01-M">
                           {userCount - maxUsers}
                         </div>
                         <PlusIcon />
@@ -48,11 +52,16 @@ const ListFound = () => {
                   )}
                 </div>
 
-                <button className="flex w-[116px] cursor-pointer items-center justify-center rounded-[10px] bg-purple-500 px-5 py-3 text-white font-B03-SB">
-                  담기
-                </button>
+                <Button
+                  text="담기"
+                  color="primary"
+                  type="submit"
+                  className="h-[42px] w-[116px] rounded-[10px] font-B03-SB"
+                  onClick={() => setIsModal(true)}
+                />
               </div>
             </div>
+            {isModal && <AddJobModal onClose={() => setIsModal(false)} />}
           </div>
         );
       })}
