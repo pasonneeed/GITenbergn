@@ -52,11 +52,11 @@ export default function DropDown<T extends string>({
           </div>
         </div>
         {isOpen && (
-          <ul className="absolute left-0 top-full z-10 mt-2 max-h-60 w-full overflow-y-auto rounded-2xl border bg-white shadow-lg shadow-shadow4">
+          <ul className="absolute left-0 top-full z-10 mt-2 max-h-60 w-full overflow-y-auto rounded-2xl border bg-white shadow-shadow4">
             {backButton && (
               <li
                 onClick={backButton.onClick}
-                className="flex cursor-pointer items-center gap-2 border-b border-gray-200 px-8 py-4 text-gray-900 font-B01-B"
+                className="flex cursor-pointer items-center gap-0.5 border-b border-gray-200 px-8 py-4 text-gray-900 font-B01-B"
               >
                 <BackIcon />
                 {backButton.label}
