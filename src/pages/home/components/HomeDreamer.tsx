@@ -18,7 +18,7 @@ const HomeDreamer = () => {
         </div>
       </div>
 
-      <div className="flex flex-row gap-6">
+      <div className="grid grid-cols-3 gap-6">
         {Dreamer.map((dream, index) => (
           <DreamerCard
             key={index}
