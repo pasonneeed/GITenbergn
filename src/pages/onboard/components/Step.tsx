@@ -1,4 +1,4 @@
-import CheckIocn from '@assets/icons/check.svg?react';
+import CheckIcon from '@assets/icons/check.svg?react';
 
 interface StepProps {
   stepNumber: number;
@@ -18,7 +18,7 @@ const Step = ({ stepNumber, title, status }: StepProps) => {
         className={`flex h-8 w-8 items-center justify-center rounded-xl ${isPrevious ? 'bg-purple-100 text-purple-500' : ''} ${isCurrent ? 'bg-purple-500 text-white' : ''} ${status === 'next' ? 'bg-gray-200' : ''} `}
       >
         {isPrevious ? (
-          <CheckIocn className="h-5 w-5" />
+          <CheckIcon className="h-5 w-5" />
         ) : (
           <span>{stepNumber}</span>
         )}
