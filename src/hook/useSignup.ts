@@ -5,7 +5,8 @@ export interface SignupRequest {
   password: string;
   nickName: string;
   birthDate: string;
-  gender: string;
+  gender: string | null;
+  regionCode?: string | null;
 }
 
 export const signupUser = async (data: SignupRequest) => {

@@ -1,17 +1,36 @@
 import Cancel from '@assets/icons/bigcancel.svg?react';
-import { useState } from 'react';
+import api from '@hook/api';
+import { useEffect, useState } from 'react';
 
 interface ModalProps {
-  onClose: (selectedAddress?: string) => void;
+  onClose: (selectedAddress?: string, regionCode?: string) => void;
+}
+
+interface Region {
+  regionCode: string | null;
+  regionName: string;
 }
 
 const AddressModal = ({ onClose }: ModalProps) => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
   const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
+  const [regionList, setRegionList] = useState<Region[]>([]);
+
+  useEffect(() => {
+    const fetchRegions = async () => {
+      const res = await api.get<{ data: Region[] }>('/v1/region/all');
+      setRegionList(res.data.data);
+      console.log(res.data.data);
+    };
+    fetchRegions();
+  }, []);
 
   const handleClose = () => {
     if (selectedCity && selectedDistrict) {
-      onClose(`${selectedCity} ${selectedDistrict}`);
+      const fullName = `${selectedCity} ${selectedDistrict}`;
+      const match = regionList.find((r) => r.regionName === fullName);
+      const regionCode = match?.regionCode ?? null;
+      onClose(fullName, regionCode ?? undefined);
     } else {
       onClose();
     }

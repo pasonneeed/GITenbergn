@@ -19,9 +19,11 @@ const Signup2 = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
   const [address, setAddress] = useState('');
   const genderOptions = [
-    { label: '여자', value: 'female' },
-    { label: '남자', value: 'male' },
+    { label: '여자', value: 'FEMALE' },
+    { label: '남자', value: 'MALE' },
   ];
+  const [regionCode, setRegionCode] = useState<string | null>(null);
+
   const { loginId, password, gender } = useSignupStore();
 
   const {
@@ -45,11 +47,11 @@ const Signup2 = () => {
         nickName: data.nickname,
         birthDate: data.date,
         gender: (selectedGender ?? gender)?.toUpperCase(),
+        regionCode,
       };
 
       await signupUser(requestData);
       console.log(requestData);
-      // console.log('보내는 지역코드:', requestData.add);
       console.log('회원가입 완료!');
     } catch (error) {
       console.error('회원가입 실패:', error);
@@ -154,12 +156,12 @@ const Signup2 = () => {
           className="h-[60px] w-full font-T05-SB"
         />
       </div>
-
       {isModal && (
         <AddressModal
-          onClose={(selectedAddress?: string) => {
-            if (selectedAddress) {
+          onClose={(selectedAddress?: string, selectedRegionCode?: string) => {
+            if (selectedAddress && selectedRegionCode) {
               setAddress(selectedAddress);
+              setRegionCode(selectedRegionCode);
             }
             setIsModal(false);
           }}
