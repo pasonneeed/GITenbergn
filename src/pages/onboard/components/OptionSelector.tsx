@@ -20,6 +20,7 @@ const OptionSelector = ({ options, value, onChange }: OptionSelectorProps) => {
             onClick={() => onChange(option)}
             className={clsx(
               'flex w-full items-center justify-between rounded-2xl border px-4 py-5 transition',
+              'focus:outline-none',
               isSelected
                 ? 'border-purple-500 bg-purple-100 text-purple-500'
                 : 'border-gray-300 bg-white text-gray-800'
