@@ -5,6 +5,12 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react-jsx",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2020",
     "baseUrl": ".",
     "paths": {
       "@assets/*": ["src/assets/*"],
@@ -18,7 +24,7 @@
       "@utils/*": ["src/utils/*"],
       "@validation/*": ["src/validation/*"]
     },
-    "types": ["vite-plugin-svgr/client"]
-  }
-  // "include": ["svg.d.ts"]
+    "types": ["vite-plugin-svgr/client","jest", "@testing-library/jest-dom"]
+  },
+   "include": ["jest.setup.ts"]
 }
