@@ -12,12 +12,14 @@ import {
 } from '@validation/signup/SignupSchema';
 
 const Signup2 = () => {
-  const [selectedGender, setSelectedGender] = useState<
-    'female' | 'male' | null
-  >(null);
+  const [selectedGender, setSelectedGender] = useState<string | null>(null);
   const isMobile = useMediaQuery();
   const [isModal, setIsModal] = useState<boolean>(false);
   const [address, setAddress] = useState('');
+  const genderOptions = [
+    { label: '여자', value: 'female' },
+    { label: '남자', value: 'male' },
+  ];
 
   const {
     handleSubmit,
@@ -99,28 +101,20 @@ const Signup2 = () => {
         <div className="flex w-full flex-col gap-2">
           <span className="text-gray-600 font-B01-M">성별</span>
           <div className="flex flex-row gap-3">
-            <button
-              type="button"
-              onClick={() => setSelectedGender('female')}
-              className={`flex h-[68px] w-full cursor-pointer items-center justify-center rounded-2xl px-5 py-6 ${
-                selectedGender === 'female'
-                  ? 'bg-purple-150 text-purple-500 font-B02-SB'
-                  : 'bg-gray-100 text-gray-400 font-B02-M'
-              }`}
-            >
-              여자
-            </button>
-            <button
-              type="button"
-              onClick={() => setSelectedGender('male')}
-              className={`flex h-[68px] w-full cursor-pointer items-center justify-center rounded-2xl px-5 py-6 ${
-                selectedGender === 'male'
-                  ? 'bg-purple-150 text-purple-500 font-B02-SB'
-                  : 'bg-gray-100 text-gray-400 font-B02-M'
-              }`}
-            >
-              남자
-            </button>
+            {genderOptions.map(({ label, value }) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => setSelectedGender(value)}
+                className={`flex h-[68px] w-full cursor-pointer items-center justify-center rounded-2xl px-5 py-6 ${
+                  selectedGender === value
+                    ? 'bg-purple-150 text-purple-500 font-B02-SB'
+                    : 'bg-gray-100 text-gray-400 font-B02-M'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
           </div>
         </div>
 
