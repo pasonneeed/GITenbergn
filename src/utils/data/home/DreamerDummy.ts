@@ -21,14 +21,11 @@ const Dreamer = [
     day: '37',
     todo: '10',
     profile: ProfileSample,
-    todotext: [
-      '할일이 매우 많은데 눈감는중이에요',
-      '우리 모두 화이팅팅탱탱후라이팬놀이',
-    ],
+    todotext: [],
     doneList: [true, true],
   },
   {
-    regionName: '대전광역시 유성동',
+    regionName: '',
     job: '유치원교사',
     nickname: '딸기라떼',
     day: '10',

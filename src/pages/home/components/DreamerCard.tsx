@@ -58,37 +58,49 @@ const DreamerCard = ({
 
       <div className="mb-4 mt-6 flex flex-row items-center justify-center gap-[10px]">
         <span className="text-gray-500 font-B02-M">지역</span>
-        <span className="text-gray-800 font-B02-SB">{regionName}</span>
+        {regionName ? (
+          <span className="text-gray-800 font-B02-SB">{regionName}</span>
+        ) : (
+          <span className="text-gray-500 font-B02-SB">
+            등록된 지역이 없어요
+          </span>
+        )}
       </div>
 
       <Divider />
 
       <div className="mt-6 flex w-full flex-col gap-3">
-        {todotext.map((text, index) => {
-          const done = checked[index];
+        {todotext.length === 0 ? (
+          <span className="text-gray-500 font-B02-M">
+            작성된 할일 목록이 없어요
+          </span>
+        ) : (
+          todotext.map((text, index) => {
+            const done = checked[index];
 
-          return (
-            <div
-              key={index}
-              className="flex w-full flex-row items-center gap-2"
-            >
+            return (
               <div
-                className={`flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-lg border ${done ? 'border-purple-300 bg-purple-150 text-purple-600' : 'border-gray-300 bg-gray-100 text-transparent'} cursor-pointer`}
-                onClick={() => toggleCheck(index)}
+                key={index}
+                className="flex w-full flex-row items-center gap-2"
               >
-                {done && <Check className="h-[19px] w-[19px]" />}
-              </div>
+                <div
+                  className={`flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-lg border ${done ? 'border-purple-300 bg-purple-150 text-purple-600' : 'border-gray-300 bg-gray-100 text-transparent'} cursor-pointer`}
+                  onClick={() => toggleCheck(index)}
+                >
+                  {done && <Check className="h-[19px] w-[19px]" />}
+                </div>
 
-              <span
-                className={`truncate font-B02-M ${
-                  done ? 'text-gray-500' : 'text-gray-800'
-                }`}
-              >
-                {text}
-              </span>
-            </div>
-          );
-        })}
+                <span
+                  className={`truncate font-B02-M ${
+                    done ? 'text-gray-500' : 'text-gray-800'
+                  }`}
+                >
+                  {text}
+                </span>
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
   );
