@@ -3,7 +3,7 @@ import HomeCardImage from '@assets/images/home_card.png';
 
 export const HomeBackImage = () => {
   return (
-    <div className="w-full items-center justify-center">
+    <div className="flex w-full items-center justify-center">
       <img
         src={HomeHeaderImage}
         alt="홈헤더 이미지"
@@ -15,7 +15,7 @@ export const HomeBackImage = () => {
 
 export const HomeCard = () => {
   return (
-    <div className="w-full items-center justify-center">
+    <div className="flex w-full items-center justify-center">
       <img
         src={HomeCardImage}
         alt="홈카드"
