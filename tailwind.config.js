@@ -29,6 +29,8 @@ export default {
         'gray-900': '#171D24',
         white: '#ffffff',
         black: '#121212',
+        warning: '#FF262A',
+        success: '#0075EB',
       },
       dropShadow: {
         shadow1: [
