@@ -5,18 +5,15 @@ type FilterState = {
   startDate: string;
   endDate: string;
   trainingCourse: string;
-  trainingMethod: string;
 };
 
 type FilterActions = {
   setSelection: (
-    key: 'job' | 'location' | 'trainingCourse' | 'trainingMethod',
+    key: 'job' | 'location' | 'trainingCourse',
     value: string
   ) => void;
   updateDate: (key: 'startDate' | 'endDate', value: string) => void;
-  removeTag: (
-    type: 'job' | 'location' | 'date' | 'trainingCourse' | 'trainingMethod'
-  ) => void;
+  removeTag: (type: 'job' | 'location' | 'date' | 'trainingCourse') => void;
   reset: () => void;
 };
 
@@ -26,7 +23,6 @@ export const useFilterStore = create<FilterState & FilterActions>((set) => ({
   startDate: '',
   endDate: '',
   trainingCourse: '',
-  trainingMethod: '',
 
   setSelection: (key, value) =>
     set((state) => ({
@@ -55,6 +51,5 @@ export const useFilterStore = create<FilterState & FilterActions>((set) => ({
       startDate: '',
       endDate: '',
       trainingCourse: '',
-      trainingMethod: '',
     }),
 }));
