@@ -1,21 +1,28 @@
-import Filter from '@pages/jobSearch/components/Filter.tsx'; // 실제 필터 컴포넌트 경로로 맞춰주세요
-import MagnifyIcon from '@assets/images/reading.png';
+import Filter from '@pages/jobSearch/components/Filter.tsx';
+import MagnifyIcon from '@assets/images/job_search.webp';
 import RecruitCard from '@common/RecruitCard.tsx';
 import RecruitDummy, { RecruitItem } from '@utils/data/search/searchDummy.ts';
+import Img from '@assets/images/illustration_1.webp';
 import Footer from '@common/Footer.tsx';
 
 const JobSearchPage = () => {
   return (
     <div className="flex flex-col">
-      <div className="bg-gray-100">
-        <div className="container mx-auto flex flex-col items-start gap-4 py-48 md:px-0">
-          <img src={MagnifyIcon} alt="돋보기" />
+      <div className="bg-purple-100">
+        <div className="container mx-auto mb-16 flex flex-col items-start gap-4 py-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex flex-col gap-4">
+            <img className="h-12 w-12" src={MagnifyIcon} alt="돋보기" />
             <p className="text-gray-500 font-B03-M">일자리 찾기</p>
             <h1 className="text-gray-900 font-T01-B">
               우리 집 근처, 일자리를 찾아보세요
             </h1>
           </div>
+
+          <img
+            className="h-auto max-w-xs lg:max-w-sm"
+            src={Img}
+            alt="일자리 이미지"
+          />
         </div>
       </div>
 

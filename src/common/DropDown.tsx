@@ -1,7 +1,7 @@
 import { useDropdown } from '@hook/useDropdown.ts';
 import BackIcon from '@assets/icons/back.svg?react';
 import DropDownIcon from '@assets/icons/drop_down.svg?react';
-import Divider from '@common/Divider.tsx';
+import clsx from 'clsx';
 
 export interface DropDownProps<T extends string> {
   placeholder?: string;
@@ -36,29 +36,33 @@ export default function DropDown<T extends string>({
         <div className="h-4" />
         <div
           onClick={toggle}
-          className="flex cursor-pointer items-center justify-between rounded-2xl border px-4 py-5 text-gray-500"
+          className={clsx(
+            'flex cursor-pointer items-center justify-between rounded-2xl border px-4 py-5 text-gray-500 transition-colors duration-200',
+            isOpen ? 'border-purple-500' : 'border-gray-300'
+          )}
         >
           <span>{placeholder}</span>
           <div
-            className={`transition-transform duration-200 ${
-              isOpen ? 'rotate-180' : ''
-            }`}
+            className={clsx(
+              'transition-transform duration-200',
+              isOpen && 'rotate-180'
+            )}
           >
             <DropDownIcon />
           </div>
         </div>
         {isOpen && (
-          <ul className="absolute left-0 top-full z-10 mt-2 max-h-60 w-full overflow-y-auto rounded-2xl border bg-white shadow-lg">
+          <ul className="absolute left-0 top-full z-10 mt-2 max-h-60 w-full overflow-y-auto rounded-2xl border bg-white shadow-shadow4">
             {backButton && (
               <li
                 onClick={backButton.onClick}
-                className="flex cursor-pointer items-center gap-2 px-6 py-4 text-gray-900 font-B01-B"
+                className="flex cursor-pointer items-center gap-0.5 border-b border-gray-200 px-8 py-4 text-gray-900 font-B01-B"
               >
                 <BackIcon />
                 {backButton.label}
               </li>
             )}
-            <Divider />
+
             {options.map((opt) => (
               <li
                 key={opt}
@@ -66,7 +70,7 @@ export default function DropDown<T extends string>({
                   onSelect(opt);
                   if (!keepOpenOnSelect) toggle();
                 }}
-                className={`cursor-pointer px-4 py-3 font-B01-M hover:text-purple-500 ${
+                className={`cursor-pointer px-8 py-3 font-B01-M hover:text-purple-500 ${
                   value === opt ? 'text-purple-500' : 'text-gray-400'
                 }`}
               >
