@@ -5,7 +5,7 @@ import HideLayout from '@outlet/HideLayout';
 import ShowLayout from '@outlet/ShowLayout';
 import OnBoardingPage from '@pages/onboard/OnBoardingPage.tsx';
 import Home from '@pages/home/Home';
-import JobRecommendPage from '@pages/jobRecommand/JobRecommandPage.tsx';
+import JobRecommendPage from '@pages/jobRecommend/JobRecommendPage.tsx';
 
 const Router = () => {
   return (
