@@ -4,7 +4,7 @@ import ListFound from './components/ListFound';
 
 const JobFound = () => {
   return (
-    <div className="h-[450px] w-full bg-gray-100 px-[120px] pt-20">
+    <div className="h-[450px] w-full bg-[#D5D5FF] px-[120px] pt-20">
       <div className="flex flex-col">
         <img
           src={foundIcon}
