@@ -14,7 +14,7 @@ const LearningPage = () => {
   return (
     <div className="flex flex-col">
       <div className="bg-gray-100">
-        <div className="container mx-auto flex flex-col items-start gap-4 py-16 sm:py-24 lg:py-32">
+        <div className="container mx-auto mb-8 flex flex-col items-start gap-4 py-16 sm:py-24 lg:py-32">
           <img src={PencilIcon} alt="연필" />
           <div className="flex flex-col gap-4">
             <p className="text-gray-500 font-B03-M">일자리 찾기</p>
