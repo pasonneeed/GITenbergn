@@ -5,6 +5,10 @@ import FloatingModal from './modal/FloatingModal';
 const FloatingButton = () => {
   const [isModal, setIsModal] = useState(false);
 
+  const handleAddTask = (task: { text: string; category: string }) => {
+    console.log('추가됨:', task);
+  };
+
   return (
     <div>
       <button
@@ -20,7 +24,10 @@ const FloatingButton = () => {
             className="absolute bottom-[140px] right-[60px]"
             onClick={(e) => e.stopPropagation()}
           >
-            <FloatingModal />
+            <FloatingModal
+              onClose={() => setIsModal(false)}
+              onAddTask={handleAddTask}
+            />
           </div>
         </div>
       )}
