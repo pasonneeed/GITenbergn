@@ -7,7 +7,7 @@ const JobTitle = () => {
       <div className="flex items-center gap-2">
         <LightBulbIcon />
         <h1 className="text-2xl text-gray-900 font-T01-B md:text-3xl">
-          {nickname}님의 적성에 맞는 직업을 골라봤어요!
+          ‘{nickname}’님의 적성에 맞는 직업을 골라봤어요!
         </h1>
       </div>
       <p className="text-gray-500 font-B01-M">
