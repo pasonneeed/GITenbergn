@@ -1,5 +1,6 @@
 import foundIcon from '@assets/images/bag.png';
-import checker from '@assets/images/checker.png';
+import FoundFilter from './components/FoundFilter';
+import ListFound from './components/ListFound';
 
 const JobFound = () => {
   return (
@@ -17,18 +18,10 @@ const JobFound = () => {
         </div>
       </div>
       <div className="shadow-shadow2 mt-[60px] flex h-[242px] w-full flex-col items-start rounded-[30px] bg-white p-[30px]">
-        자격증 보유
+        <FoundFilter />
       </div>
 
-      <div className="mt-[60px]">
-        <div className="flex h-[403px] w-[360px] items-center gap-7">
-          <img
-            src={checker}
-            alt="임시 이미지"
-            className="h-[240px] w-[360px] rounded-2xl"
-          />
-        </div>
-      </div>
+      <ListFound />
     </div>
   );
 };
