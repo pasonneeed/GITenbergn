@@ -1,38 +1,16 @@
 import { useForm, Controller } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '@common/Button';
 import { Input } from '@common/Input';
 import useMediaQuery from '@hook/useMediaQuery';
+import {
+  SignupFormValues,
+  SignupSchema,
+} from '@validation/signup/SignupSchema';
 
 interface SignupProps {
   onNext: () => void | undefined;
 }
-
-const SignupSchema = z
-  .object({
-    id: z
-      .string()
-      .min(4, '4자 이상 입력해주세요')
-      .max(20, '20자 이하로 입력해주세요')
-      .regex(/^[a-zA-Z0-9]+$/, '특수문자를 없애주세요'),
-    password: z
-      .string()
-      .min(8, '8자 이상 입력해주세요')
-      .max(16, '16자 이하로 입력해주세요')
-      .regex(/[a-z]/, '소문자를 포함해주세요')
-      .regex(/[A-Z]/, '대문자를 포함해주세요')
-      .regex(/[0-9]/, '숫자를 포함해주세요')
-      .regex(/[^A-Za-z0-9]/, '특수문자를 포함해주세요'),
-
-    passwordcheck: z.string(),
-  })
-  .refine((data) => data.password === data.passwordcheck, {
-    path: ['passwordcheck'],
-    message: '비밀번호가 일치하지 않습니다',
-  });
-
-type SignupFormValues = z.infer<typeof SignupSchema>;
 
 const Signup = ({ onNext }: SignupProps) => {
   const isMobile = useMediaQuery();
@@ -78,6 +56,8 @@ const Signup = ({ onNext }: SignupProps) => {
                 undertextClassName={
                   errors.id?.message ? 'text-warning' : 'text-gray-500'
                 }
+                minLength={4}
+                maxLength={20}
               />
             )}
           />
@@ -109,6 +89,8 @@ const Signup = ({ onNext }: SignupProps) => {
               undertextClassName={
                 errors.password ? 'text-warning' : 'text-gray-500'
               }
+              minLength={8}
+              maxLength={16}
             />
           )}
         />

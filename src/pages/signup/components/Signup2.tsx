@@ -5,23 +5,11 @@ import AddressModal from './AddressModal';
 import { Input } from '@common/Input';
 import AddressInput from './AddressInput';
 import { useForm, Controller } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-
-const schema = z.object({
-  nickname: z
-    .string()
-    .trim()
-    .min(2, '2자 이상 8자 이내의 한글, 영문, 숫자만 입력해주세요.')
-    .max(8, '2자 이상 8자 이내의 한글, 영문, 숫자만 입력해주세요.')
-    .regex(/^[ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]+$/, '특수문자를 없애주세요'),
-
-  date: z
-    .string()
-    .regex(/^\d{4}\/\d{2}\/\d{2}$/, 'YYYY/MM/DD 형식으로 입력해주세요'),
-});
-
-type FormData = z.infer<typeof schema>;
+import {
+  Signup2FormValues,
+  Signup2Schema,
+} from '@validation/signup/SignupSchema';
 
 const Signup2 = () => {
   const [selectedGender, setSelectedGender] = useState<
@@ -35,8 +23,8 @@ const Signup2 = () => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
+  } = useForm<Signup2FormValues>({
+    resolver: zodResolver(Signup2Schema),
     defaultValues: {
       nickname: '',
       date: '',
@@ -44,7 +32,7 @@ const Signup2 = () => {
     mode: 'onChange',
   });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: Signup2FormValues) => {
     console.log('폼 데이터:', data, '성별:', selectedGender);
   };
 
