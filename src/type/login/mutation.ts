@@ -1,5 +1,5 @@
 export interface LoginInput {
-  memberId: string;
+  loginId: string;
   password: string;
 }
 
@@ -8,6 +8,7 @@ export interface LoginResponse {
   timestamp: string;
   data: {
     memberId: string;
+    loginId: string;
     nickname: string;
     accessToken: string;
     refreshToken: string;

@@ -17,7 +17,7 @@ const LoginForm = () => {
   const { mutate } = useLoginMutation();
   const onSubmit = (formData: LoginFormValues) => {
     mutate({
-      memberId: formData.id,
+      loginId: formData.id,
       password: formData.password,
     });
   };
