@@ -29,6 +29,7 @@ const locationOptions = [
 
 const Filter = () => {
   const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
   const {
     isOpen: isJobOpen,
@@ -52,6 +53,7 @@ const Filter = () => {
     resetJob();
     resetLocation();
     setStartDate('');
+    setEndDate('');
   };
 
   return (
@@ -140,9 +142,28 @@ const Filter = () => {
           <div className="flex w-full items-center rounded-xl border px-4 py-5 text-sm text-gray-700 shadow-sm">
             <input
               type="text"
-              placeholder="언제부터 근무할 수 있나요?"
+              placeholder="YYYY.DD.MM"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
+              className="w-full outline-none"
+            />
+            <button className="ml-2 text-gray-400">
+              <SearchIcon />
+            </button>
+          </div>
+        </div>
+
+        {/* 근무 종료일 */}
+        <div className="flex min-w-0 flex-1 flex-col">
+          <label className="mb-2 text-sm font-semibold text-gray-900">
+            근무 종료일
+          </label>
+          <div className="flex w-full items-center rounded-xl border px-4 py-5 text-sm text-gray-700 shadow-sm">
+            <input
+              type="text"
+              placeholder="YYYY.DD.MM"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
               className="w-full outline-none"
             />
             <button className="ml-2 text-gray-400">
