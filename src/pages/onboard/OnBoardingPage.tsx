@@ -3,8 +3,10 @@ import stepQuestions from '@utils/data/onboard/onboardDummy';
 import { useOnboarding } from '@hook/useOnboarding';
 import Navigation from '@pages/onboard/components/Navigation';
 import Questions from '@pages/onboard/components/Questions';
+import { useNavigate } from 'react-router-dom';
 
 const OnBoardingPage = () => {
+  const navigate = useNavigate();
   const {
     curStep,
     curQuestionIndex,
@@ -16,6 +18,11 @@ const OnBoardingPage = () => {
     handlePrev,
     stepInfo,
   } = useOnboarding(stepQuestions);
+
+  const handleSubmit = () => {
+    // 임시로 네비게이션 처리
+    navigate('/jobrecommend');
+  };
 
   return (
     <div className="min-h-screen bg-white px-4 py-10">
@@ -48,6 +55,7 @@ const OnBoardingPage = () => {
               curStep < stepQuestions.length - 1 && !currentQuestionData
             }
             isLast={curStep === stepQuestions.length - 1}
+            onSubmit={handleSubmit}
           />
         </div>
       </div>
