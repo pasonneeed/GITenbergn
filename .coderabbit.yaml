@@ -10,7 +10,7 @@ reviews:
   auto_review:
     enabled: true
     drafts: false
-    branches:
+    base_branches:
       - main
       - develop
 chat:
