@@ -3,6 +3,7 @@ import { Input } from '@common/Input.tsx';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, LoginFormValues } from '@validation/login/loginSchema.ts';
+import clsx from 'clsx';
 
 const LoginForm = () => {
   const {
@@ -28,7 +29,10 @@ const LoginForm = () => {
             <Input
               placeholder="아이디를 입력하세요"
               {...field}
-              className="h-14 w-full font-B02-M"
+              className={clsx(
+                'h-14 w-full font-B02-M',
+                errors.id && 'border-warning'
+              )}
             />
           )}
         />
@@ -48,7 +52,10 @@ const LoginForm = () => {
               {...field}
               isPassword
               placeholder="비밀번호를 입력하세요"
-              className="h-14 w-full font-B02-M"
+              className={clsx(
+                'h-14 w-full font-B02-M',
+                errors.password && 'border-warning'
+              )}
             />
           )}
         />
