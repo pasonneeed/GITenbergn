@@ -1,21 +1,66 @@
 import Cancel from '@assets/icons/bigcancel.svg?react';
-import { useState } from 'react';
+import api from '@hook/api';
+import { useEffect, useState } from 'react';
 
 interface ModalProps {
-  onClose: (selectedAddress?: string) => void;
+  onClose: (selectedAddress?: string, regionCode?: string) => void;
+}
+
+interface Region {
+  regionCode: string | null;
+  regionName: string;
 }
 
 const AddressModal = ({ onClose }: ModalProps) => {
   const [selectedCity, setSelectedCity] = useState<string | null>(null);
   const [selectedDistrict, setSelectedDistrict] = useState<string | null>(null);
+  const [regionList, setRegionList] = useState<Region[]>([]);
+  const [cityMap, setCityMap] = useState<Record<string, string[]>>({});
+
+  useEffect(() => {
+    const fetchRegions = async () => {
+      const response = await api.get<{ data: Region[] }>('/v1/region/all');
+      const regions = response.data.data;
+
+      const map: Record<string, string[]> = {};
+      regions.forEach(({ regionName }) => {
+        const [city, district] = regionName.trim().split(/\s+/);
+        if (map[city]) {
+          if (!map[city].includes(district)) {
+            map[city].push(district);
+          }
+        } else {
+          map[city] = [district];
+        }
+      });
+
+      setRegionList(regions);
+      setCityMap(map);
+    };
+
+    fetchRegions();
+  }, []);
 
   const handleClose = () => {
     if (selectedCity && selectedDistrict) {
-      onClose(`${selectedCity} ${selectedDistrict}`);
+      const fullName = `${selectedCity} ${selectedDistrict}`;
+      const match = regionList.find((r) => r.regionName === fullName);
+      const regionCode = match?.regionCode ?? null;
+      onClose(fullName, regionCode ?? undefined);
     } else {
       onClose();
     }
   };
+
+  const filteredDistricts =
+    selectedCity && cityMap[selectedCity]
+      ? cityMap[selectedCity].map((district) => ({
+          city: selectedCity,
+          district,
+        }))
+      : Object.entries(cityMap).flatMap(([city, districts]) =>
+          districts.map((district) => ({ city, district }))
+        );
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
@@ -35,26 +80,18 @@ const AddressModal = ({ onClose }: ModalProps) => {
 
         <div className="flex w-full overflow-hidden">
           <div className="w-full max-w-[235px] cursor-pointer overflow-y-auto">
-            {[
-              //임시
-              '서울',
-              '경기',
-              '인천',
-              '부산',
-              '대구',
-              '대전',
-              '광주',
-              '울산',
-              '천안',
-            ].map((city, index) => (
+            {Object.keys(cityMap).map((city) => (
               <div
-                key={index}
-                className={`flex h-[74px] max-w-[235px] cursor-pointer items-center justify-start border-b border-r border-gray-300 px-6 py-[10px] hover:bg-white hover:text-purple-500 ${
+                key={city}
+                className={`flex h-[74px] items-center justify-start border-b border-r border-gray-300 px-6 py-[10px] hover:bg-white hover:text-purple-500 ${
                   selectedCity === city
                     ? 'bg-white text-purple-500 font-B01-SB'
                     : 'bg-gray-100 text-gray-400 font-B01-M'
                 }`}
-                onClick={() => setSelectedCity(city)}
+                onClick={() => {
+                  setSelectedCity(city);
+                  setSelectedDistrict(null);
+                }}
               >
                 {city}
               </div>
@@ -62,30 +99,28 @@ const AddressModal = ({ onClose }: ModalProps) => {
           </div>
 
           <div className="w-full overflow-y-auto">
-            {[
-              //임시
-              '강남구',
-              '강동구',
-              '강북구',
-              '강서구',
-              '관악구',
-              '광진구',
-              '구로구',
-              '금천구',
-              '금천구',
-            ].map((district, index) => (
-              <div
-                key={index}
-                className={`flex h-[74px] max-w-[365px] cursor-pointer items-center justify-start border-b border-gray-300 px-6 py-[10px] hover:bg-purple-100 hover:text-purple-500 ${
-                  selectedDistrict === district
-                    ? 'bg-purple-100 text-purple-500 font-B01-SB'
-                    : 'bg-white text-gray-900 font-B01-M'
-                }`}
-                onClick={() => setSelectedDistrict(district)}
-              >
-                {district}
-              </div>
-            ))}
+            {filteredDistricts.map(({ city, district }) => {
+              const fullName = `${city} ${district}`;
+              const isSelected =
+                selectedCity === city && selectedDistrict === district;
+
+              return (
+                <div
+                  key={fullName}
+                  className={`flex h-[74px] cursor-pointer items-center justify-start border-b border-gray-300 px-6 py-[10px] hover:bg-purple-100 hover:text-purple-500 ${
+                    isSelected
+                      ? 'bg-purple-100 text-purple-500 font-B01-SB'
+                      : 'bg-white text-gray-900 font-B01-M'
+                  }`}
+                  onClick={() => {
+                    setSelectedCity(city);
+                    setSelectedDistrict(district);
+                  }}
+                >
+                  {district}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

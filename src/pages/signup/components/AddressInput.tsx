@@ -9,6 +9,7 @@ const AddressInput = ({ onClick, address }: AddressInputProps) => {
   return (
     <button
       className="relative h-[76px] w-full flex-col items-start rounded-2xl border border-gray-300 bg-white px-5 py-[14px]"
+      type="button"
       onClick={onClick}
     >
       {address ? (

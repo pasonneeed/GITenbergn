@@ -10,6 +10,11 @@ import {
   Signup2FormValues,
   Signup2Schema,
 } from '@validation/signup/SignupSchema';
+import { useSignupStore } from '@store/useSignupStore';
+import {
+  useDuplicateNicknameMutation,
+  useSignupMutation,
+} from '@hook/useSignup';
 
 const Signup2 = () => {
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
@@ -17,13 +22,22 @@ const Signup2 = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
   const [address, setAddress] = useState('');
   const genderOptions = [
-    { label: '여자', value: 'female' },
-    { label: '남자', value: 'male' },
+    { label: '여자', value: 'FEMALE' },
+    { label: '남자', value: 'MALE' },
   ];
+  const [regionCode, setRegionCode] = useState<string | null>(null);
 
+  const { loginId, password, gender } = useSignupStore();
+  const { mutate } = useSignupMutation();
+  const { mutate: checkNickname } = useDuplicateNicknameMutation();
+  const [duplicateMessage, setDuplicateMessage] = useState<string | null>(null);
+  const [duplicateSuccess, setDuplicateSuccess] = useState<boolean | null>(
+    null
+  );
   const {
     handleSubmit,
     control,
+    getValues,
     formState: { errors },
   } = useForm<Signup2FormValues>({
     resolver: zodResolver(Signup2Schema),
@@ -35,7 +49,42 @@ const Signup2 = () => {
   });
 
   const onSubmit = (data: Signup2FormValues) => {
-    console.log('폼 데이터:', data, '성별:', selectedGender);
+    if (duplicateSuccess !== true) {
+      setDuplicateMessage('닉네임 중복확인을 완료해주세요');
+      setDuplicateSuccess(false);
+      return;
+    }
+    const requestData = {
+      loginId,
+      password,
+      nickName: data.nickname,
+      birthDate: data.date,
+      gender: selectedGender ?? gender,
+      regionCode,
+    };
+
+    mutate(requestData);
+  };
+
+  const handleCheckNickname = () => {
+    const nickName = getValues('nickname');
+    if (!nickName) return;
+
+    checkNickname(nickName, {
+      onSuccess: (data) => {
+        if (data.duplicated) {
+          setDuplicateSuccess(false);
+          setDuplicateMessage('이미 사용 중인 닉네임입니다.');
+        } else {
+          setDuplicateSuccess(true);
+          setDuplicateMessage('사용가능한 닉네임입니다');
+        }
+      },
+      onError: () => {
+        setDuplicateSuccess(false);
+        setDuplicateMessage('이미 사용 중인 닉네임입니다.');
+      },
+    });
   };
 
   return (
@@ -63,10 +112,18 @@ const Signup2 = () => {
                   errors.nickname ? 'border-warning' : ''
                 }`}
                 undertext={
-                  errors.nickname?.message || '2~8자 이내의 한글, 영문, 숫자'
+                  errors.nickname?.message
+                    ? errors.nickname.message
+                    : duplicateMessage || '2~8자 이내의 한글, 영문, 숫자'
                 }
                 undertextClassName={
-                  errors.nickname?.message ? 'text-warning' : 'text-gray-500'
+                  errors.nickname?.message
+                    ? 'text-warning'
+                    : duplicateSuccess === true
+                      ? 'text-success'
+                      : duplicateSuccess === false
+                        ? 'text-warning'
+                        : 'text-gray-500'
                 }
                 minLength={1}
                 maxLength={8}
@@ -75,6 +132,7 @@ const Signup2 = () => {
           />
           <button
             type="button"
+            onClick={handleCheckNickname}
             className="absolute right-4 top-[52%] h-[38px] -translate-y-1/2 cursor-pointer rounded-[10px] bg-gray-400 px-[10px] py-2 text-white font-B03-M"
           >
             중복확인
@@ -135,12 +193,12 @@ const Signup2 = () => {
           className="h-[60px] w-full font-T05-SB"
         />
       </div>
-
       {isModal && (
         <AddressModal
-          onClose={(selectedAddress?: string) => {
-            if (selectedAddress) {
+          onClose={(selectedAddress?: string, selectedRegionCode?: string) => {
+            if (selectedAddress && selectedRegionCode) {
               setAddress(selectedAddress);
+              setRegionCode(selectedRegionCode);
             }
             setIsModal(false);
           }}
