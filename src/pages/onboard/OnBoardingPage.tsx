@@ -44,7 +44,7 @@ const OnBoardingPage = () => {
           onNext={handleNext}
           disablePrev={curStep === 0 && curQuestionIndex === 0}
           disableNext={
-            curStep === stepQuestions.length - 1 && !currentQuestionData
+            curStep < stepQuestions.length - 1 && !currentQuestionData
           }
           isLast={curStep === stepQuestions.length - 1}
         />
