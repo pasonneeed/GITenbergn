@@ -151,6 +151,13 @@ export default {
           fontSize: '12px',
           lineHeight: 1.3,
         },
+        '.no-scrollbar': {
+          '-ms-overflow-style': 'none',
+          'scrollbar-width': 'none',
+        },
+        '.no-scrollbar::-webkit-scrollbar': {
+          display: 'none',
+        },
       });
     },
   ],
