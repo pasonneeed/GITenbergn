@@ -16,7 +16,7 @@
       "@pages/*": ["src/pages/*"],
       "@route/*": ["src/route/*"],
       "@store/*": ["src/store/*"],
-      "@types/*": ["src/types/*"],
+      "@type/*": ["src/type/*"],
       "@utils/*": ["src/utils/*"],
       "@validation/*": ["src/validation/*"]
     },
