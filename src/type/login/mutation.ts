@@ -8,6 +8,7 @@ export interface LoginResponse {
   timestamp: string;
   data: {
     memberId: string;
+    nickname: string;
     accessToken: string;
     refreshToken: string;
   };
