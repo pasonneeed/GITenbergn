@@ -1,21 +1,7 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-
-interface LoginInput {
-  memberId: string;
-  password: string;
-}
-
-interface LoginResponse {
-  success: boolean;
-  timestamp: string;
-  data: {
-    memberId: string;
-    accessToken: string;
-    refreshToken: string;
-  };
-}
+import { LoginInput, LoginResponse, ErrorResponse } from '@type/login/mutation';
 
 export const useLoginMutation = () => {
   const navigate = useNavigate();
@@ -37,8 +23,8 @@ export const useLoginMutation = () => {
         alert('로그인에 실패했습니다. 다시 시도해주세요.');
       }
     },
-    onError: (error: any) => {
-      const errorMsg = error.response.data.message;
+    onError: (error: AxiosError<ErrorResponse>) => {
+      const errorMsg = error.response?.data.message;
       alert(errorMsg);
     },
   });
