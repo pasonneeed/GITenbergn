@@ -3,6 +3,7 @@ import { Input } from '@common/Input.tsx';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, LoginFormValues } from '@validation/login/loginSchema.ts';
+import { useLoginMutation } from '@hook/useLoginMutation';
 import clsx from 'clsx';
 
 const LoginForm = () => {
@@ -13,12 +14,15 @@ const LoginForm = () => {
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
   });
-
+  const { mutate } = useLoginMutation();
+  const onSubmit = (formData: LoginFormValues) => {
+    mutate({
+      memberId: formData.id,
+      password: formData.password,
+    });
+  };
   return (
-    <form
-      onSubmit={handleSubmit((data) => console.log(data))}
-      className="mt-8 w-full space-y-5"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-8 w-full space-y-5">
       <div className="space-y-1">
         <div className="text-gray-700 font-B01-M">아이디</div>
         <Controller
@@ -37,7 +41,7 @@ const LoginForm = () => {
           )}
         />
         {errors.id && (
-          <p className="text-warning text-sm">{errors.id.message}</p>
+          <p className="text-sm text-warning">{errors.id.message}</p>
         )}
       </div>
 
@@ -60,7 +64,7 @@ const LoginForm = () => {
           )}
         />
         {errors.password && (
-          <p className="text-warning text-sm">{errors.password.message}</p>
+          <p className="text-sm text-warning">{errors.password.message}</p>
         )}
       </div>
 
