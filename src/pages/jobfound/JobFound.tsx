@@ -5,6 +5,7 @@ import FoundIller from '@assets/images/foundillust.webp';
 import Pagination from '@common/Pagination';
 import FoundJobs from '@utils/data/jobfound/JobFoundDummy';
 import usePagination from '@hook/usePagination';
+import Footer from '@common/Footer';
 
 const JobFound = () => {
   const { currentItems, currentPage, setCurrentPage, totalPages } =
@@ -15,7 +16,7 @@ const JobFound = () => {
 
   return (
     <div className="flex min-h-screen w-full flex-col">
-      <div className="h-[450px] w-full bg-[#D5D5FF] px-[120px] pt-20">
+      <div className="h-[450px] bg-[#D5D5FF] px-[120px] pt-20">
         <div className="flex items-center justify-between">
           <div className="flex flex-col">
             <img
@@ -39,10 +40,12 @@ const JobFound = () => {
         </div>
 
         <FoundFilter />
+      </div>
 
+      <div className="mt-[182px] flex-grow px-[120px]">
         <ListFound jobs={currentItems} />
 
-        <div className="pb-20">
+        <div className="mb-[80px] mt-[30px]">
           <Pagination
             totalPages={totalPages}
             currentPage={currentPage}
@@ -50,6 +53,8 @@ const JobFound = () => {
           />
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };
