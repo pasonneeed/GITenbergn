@@ -17,7 +17,8 @@
       "@route/*": ["src/route/*"],
       "@store/*": ["src/store/*"],
       "@types/*": ["src/types/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@validation/*": ["src/validation/*"]
     },
     /* Bundler mode */
     "moduleResolution": "bundler",
