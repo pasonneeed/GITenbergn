@@ -55,7 +55,7 @@ export function useOnboarding(steps: StepQuestion[]) {
         .slice(0, curStep)
         .reduce((sum, st) => sum + (st.questions?.length ?? 1), 0) +
       curQuestionIndex;
-    const percent = Math.round((done / total) * 100);
+    const percent = total > 0 ? Math.round((done / total) * 100) : 0;
     return { totalQuestions: total, progressPercent: percent };
   }, [steps, curStep, curQuestionIndex]);
 
