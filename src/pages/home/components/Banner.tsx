@@ -41,12 +41,10 @@ const Banner = () => {
                 </div>
               </div>
 
-              <div className="mt-6">
-                <span className="text-gray-900 font-T01-B">
-                  {' '}
-                  인기 직종 구인 현황
-                </span>
-              </div>
+              <span className="mt-6 text-gray-900 font-T01-B">
+                {' '}
+                인기 직종 구인 현황
+              </span>
 
               <div className="mt-[27px] flex flex-col items-center justify-center">
                 <div className="flex flex-col gap-4">
