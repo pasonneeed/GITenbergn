@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import Divider from '@common/Divider';
-import Check from '@assets/icons/check.svg?react';
+import CheckList from '@common/CheckList';
 
 interface DreamerCardProps {
   regionName: string;
@@ -23,14 +22,6 @@ const DreamerCard = ({
   todotext,
   doneList,
 }: DreamerCardProps) => {
-  const [checked, setChecked] = useState([...doneList]);
-
-  const toggleCheck = (index: number) => {
-    const newList = [...checked];
-    newList[index] = !newList[index];
-    setChecked(newList);
-  };
-
   return (
     <div className="hover:drop-shadow-dropdown2 flex h-auto w-[384px] flex-col items-start rounded-[30px] border-[1.2px] border-gray-300 bg-white p-[30px] transition-shadow">
       <div className="flex flex-row gap-5">
@@ -75,31 +66,11 @@ const DreamerCard = ({
             작성된 할일 목록이 없어요
           </span>
         ) : (
-          todotext.map((text, index) => {
-            const done = checked[index];
-
-            return (
-              <div
-                key={index}
-                className="flex w-full flex-row items-center gap-2"
-              >
-                <div
-                  className={`flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-lg border ${done ? 'border-purple-300 bg-purple-150 text-purple-600' : 'border-gray-300 bg-gray-100 text-transparent'} cursor-pointer`}
-                  onClick={() => toggleCheck(index)}
-                >
-                  {done && <Check className="h-[19px] w-[19px]" />}
-                </div>
-
-                <span
-                  className={`truncate font-B02-M ${
-                    done ? 'text-gray-500' : 'text-gray-800'
-                  }`}
-                >
-                  {text}
-                </span>
-              </div>
-            );
-          })
+          <CheckList
+            lists={todotext}
+            defaultCheckedList={doneList}
+            className="flex flex-col gap-3"
+          />
         )}
       </div>
     </div>
