@@ -3,6 +3,7 @@ import LoginPage from '@pages/login/LoginPage';
 import SignupFunnel from '@pages/signup/SignupFunnel';
 import HideLayout from '@outlet/HideLayout';
 import ShowLayout from '@outlet/ShowLayout';
+import OnBoardingPage from '@pages/onboard/OnBoardingPage.tsx';
 import Home from '@pages/home/Home';
 
 const Router = () => {
@@ -16,6 +17,7 @@ const Router = () => {
 
         <Route element={<ShowLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/onboard" element={<OnBoardingPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
