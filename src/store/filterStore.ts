@@ -22,7 +22,16 @@ type FilterActions = {
     value: string
   ) => void;
   updateDate: (key: 'startDate' | 'endDate', value: string) => void;
-  removeTag: (type: 'job' | 'location' | 'date' | 'trainingCourse') => void;
+  removeTag: (
+    type:
+      | 'job'
+      | 'location'
+      | 'date'
+      | 'trainingCourse'
+      | 'require'
+      | 'workTime'
+      | 'bodyActivity'
+  ) => void;
   reset: () => void;
 };
 
