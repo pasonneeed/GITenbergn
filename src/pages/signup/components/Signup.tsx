@@ -36,6 +36,11 @@ const Signup = ({ onNext }: SignupProps) => {
 
   const onSubmit = (data: SignupFormValues) => {
     console.log('제출된 값:', data);
+    if (duplicateSuccess !== true) {
+      setDuplicateMessage('아이디 중복확인을 완료해주세요');
+      setDuplicateSuccess(false);
+      return;
+    }
     setField('loginId', data.loginId);
     setField('password', data.password);
     onNext();

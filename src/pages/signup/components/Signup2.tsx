@@ -49,6 +49,11 @@ const Signup2 = () => {
   });
 
   const onSubmit = (data: Signup2FormValues) => {
+    if (duplicateSuccess !== true) {
+      setDuplicateMessage('닉네임 중복확인을 완료해주세요');
+      setDuplicateSuccess(false);
+      return;
+    }
     const requestData = {
       loginId,
       password,
