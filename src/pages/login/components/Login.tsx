@@ -1,12 +1,19 @@
 import Button from '@common/Button.tsx';
 import { Input } from '@common/Input.tsx';
-import { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { loginSchema, LoginFormValues } from '@validation/loginSchema';
 import LoginImage from '@assets/images/login.png';
 import Divider from '@common/Divider.tsx';
 
 const Login = () => {
-  const [password, setPassword] = useState('');
-  const [id, setId] = useState('');
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+  });
 
   return (
     <div className="flex items-center justify-center bg-white px-4">
@@ -30,26 +37,49 @@ const Login = () => {
               </div>
             </div>
 
-            <form className="mt-8 w-full space-y-5">
+            <form
+              onSubmit={handleSubmit((data) => console.log(data))}
+              className="mt-8 w-full space-y-5"
+            >
               <div className="space-y-1">
                 <div className="text-gray-700 font-B01-M">아이디</div>
-                <Input
-                  placeholder="아이디를 입력하세요"
-                  value={id}
-                  onChange={(e) => setId(e.target.value)}
-                  className="h-14 w-full font-B02-M"
+                <Controller
+                  name={'id'}
+                  control={control}
+                  defaultValue={''}
+                  render={({ field }) => (
+                    <Input
+                      placeholder="아이디를 입력하세요"
+                      {...field}
+                      className="h-14 w-full font-B02-M"
+                    />
+                  )}
                 />
+                {errors.id && (
+                  <p className="text-sm text-red-500">{errors.id.message}</p>
+                )}
               </div>
 
               <div className="space-y-1 pb-4">
                 <div className="text-gray-700 font-B01-M">비밀번호</div>
-                <Input
-                  placeholder="비밀번호를 입력하세요"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  isPassword
-                  className="h-14 w-full font-B02-M"
+                <Controller
+                  name="password"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <Input
+                      {...field}
+                      isPassword
+                      placeholder="비밀번호를 입력하세요"
+                      className="h-14 w-full font-B02-M"
+                    />
+                  )}
                 />
+                {errors.password && (
+                  <p className="text-sm text-red-500">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
 
               <Button
