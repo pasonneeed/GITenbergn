@@ -53,7 +53,7 @@ const LoginBanner = ({ regionName = '대전 서구' }: LoginBannerProps) => {
                 </div>
               </div>
 
-              <div className="absolute bottom-2 left-[7.4px] flex h-[258px] w-[772.4px] rounded-b-[30px] bg-white drop-shadow-shadow2">
+              <div className="shadow-shadow2 absolute bottom-2 left-[7.4px] flex h-[258px] w-[772.4px] rounded-b-[30px] bg-white">
                 <div className="absolute -top-[33px] left-[30px] flex items-center justify-center border-b-[3px] border-white">
                   {tabs.map((tab) => (
                     <button
