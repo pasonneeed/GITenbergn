@@ -59,7 +59,7 @@ const Signup2 = () => {
       password,
       nickName: data.nickname,
       birthDate: data.date,
-      gender: (selectedGender ?? gender)?.toUpperCase(),
+      gender: selectedGender ?? gender,
       regionCode,
     };
 
