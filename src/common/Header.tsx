@@ -17,7 +17,7 @@ const Header = ({ type }: ShowProps) => {
   const navigate = useNavigate();
 
   return (
-    <div className="fixed left-0 top-0 flex h-20 w-full items-center justify-between border-b border-gray-200 bg-white px-[120px] py-5">
+    <div className="fixed left-0 top-0 z-50 flex h-20 w-full items-center justify-between border-b border-gray-200 bg-white px-[120px] py-5">
       <div className="flex flex-row items-center gap-5">
         <Logo />
         {NavItems.map(({ label, path }) => (
