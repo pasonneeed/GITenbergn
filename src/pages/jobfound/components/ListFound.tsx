@@ -1,14 +1,30 @@
+import { useState } from 'react';
 import PlusIcon from '@assets/icons/plus.svg?react';
 import Button from '@common/Button';
 import AddJobModal from '@common/modal/AddJobModal';
-import FoundJobs from '@utils/data/jobfound/JobFoundDummy';
-import { useState } from 'react';
+import type { FoundJob } from '@utils/data/jobfound/JobFoundDummy';
 
-const ListFound = () => {
-  const [isModal, setIsModal] = useState<Boolean>(false);
+interface ListFoundProps {
+  jobs: FoundJob[];
+}
+
+const ListFound = ({ jobs }: ListFoundProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState<FoundJob | null>(null);
+
+  const handleOpenModal = (job: FoundJob) => {
+    setSelectedJob(job);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedJob(null);
+  };
+
   return (
     <div className="grid grid-cols-3 gap-6 px-9 py-[60px]">
-      {FoundJobs.map((item) => {
+      {jobs.map((item) => {
         const users = item.userProfiles;
         const userCount = users.length;
         const maxUsers = 3;
@@ -57,14 +73,15 @@ const ListFound = () => {
                   color="primary"
                   type="submit"
                   className="h-[42px] w-[116px] rounded-[10px] font-B03-SB"
-                  onClick={() => setIsModal(true)}
+                  onClick={() => handleOpenModal(item)}
                 />
               </div>
             </div>
-            {isModal && <AddJobModal onClose={() => setIsModal(false)} />}
           </div>
         );
       })}
+
+      {isModalOpen && selectedJob && <AddJobModal onClose={handleCloseModal} />}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import checker from '@assets/images/checker.png';
 import sample from '@assets/images/tmp.png';
 
-interface FoundJob {
+export interface FoundJob {
   id: number;
   title: string;
   tags: string;
