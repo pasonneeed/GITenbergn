@@ -2,6 +2,7 @@ import { useDropdown } from '@hook/useDropdown.ts';
 import BackIcon from '@assets/icons/back.svg?react';
 import DropDownIcon from '@assets/icons/drop_down.svg?react';
 import Divider from '@common/Divider.tsx';
+import clsx from 'clsx';
 
 export interface DropDownProps<T extends string> {
   placeholder?: string;
@@ -36,13 +37,17 @@ export default function DropDown<T extends string>({
         <div className="h-4" />
         <div
           onClick={toggle}
-          className="flex cursor-pointer items-center justify-between rounded-2xl border px-4 py-5 text-gray-500"
+          className={clsx(
+            'flex cursor-pointer items-center justify-between rounded-2xl border px-4 py-5 text-gray-500 transition-colors duration-200',
+            isOpen ? 'border-purple-500' : 'border-gray-300'
+          )}
         >
           <span>{placeholder}</span>
           <div
-            className={`transition-transform duration-200 ${
-              isOpen ? 'rotate-180' : ''
-            }`}
+            className={clsx(
+              'transition-transform duration-200',
+              isOpen && 'rotate-180'
+            )}
           >
             <DropDownIcon />
           </div>
