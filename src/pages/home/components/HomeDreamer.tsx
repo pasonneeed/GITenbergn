@@ -9,7 +9,10 @@ const HomeDreamer = () => {
         <div className="text-gray-900 font-T02-B">
           나와 같은 꿈을 꾸는 드리머예요!
         </div>
-        <div className="flex cursor-pointer flex-row items-center text-gray-500 font-B02-SB">
+        <div
+          className="flex cursor-pointer flex-row items-center text-gray-500 font-B02-SB"
+          onClick={() => '/'}
+        >
           더 보러가기
           <Arrow />
         </div>
