@@ -1,7 +1,7 @@
 ---
 name: "[\U0001F41BBUG]"
 about: 버그 생성
-title: ''
+title: "[\U0001F41BBUG]"
 labels: ''
 assignees: ''
 

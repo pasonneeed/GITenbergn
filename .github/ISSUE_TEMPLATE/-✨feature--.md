@@ -1,7 +1,7 @@
 ---
 name: "[✨FEATURE] "
 about: 기능 생성
-title: ''
+title: "[✨FEATURE] "
 labels: ''
 assignees: ''
 

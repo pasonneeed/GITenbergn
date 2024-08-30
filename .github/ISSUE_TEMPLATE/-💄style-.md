@@ -1,7 +1,7 @@
 ---
 name: "[\U0001F484STYLE]"
 about: 스타일링
-title: ''
+title: "[\U0001F484STYLE]"
 labels: ''
 assignees: ''
 
