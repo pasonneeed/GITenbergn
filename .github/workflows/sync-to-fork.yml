@@ -1,0 +1,32 @@
+name: Sync Fork with Upstream
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    if: github.repository == 'TEAM-DoDream/DoDream_FE'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Set up Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Add Fork as Remote
+        run: git remote add fork https://github.com/cywin1018/DoDream_FE.git
+
+      - name: Push changes to Fork
+        env:
+          GITHUB_USERNAME: cywin1018
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          git push -f https://$GITHUB_USERNAME:$GITHUB_TOKEN@github.com/cywin1018/DoDream_FE.git main
