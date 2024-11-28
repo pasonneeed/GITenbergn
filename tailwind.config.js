@@ -8,12 +8,13 @@ export default {
       },
       colors: {
         /** Primary **/
-        'purple-100': '#EFEDFF',
-        'purple-200': '#BCB3FF',
-        'purple-300': '#A094FF',
-        'purple-400': '#5B46FF',
-        'purple-500': '#4031B3',
-        'purple-600': '#382B9C',
+        'purple-100': '#F3F1FF',
+        'purple-200': '#CCC6FF',
+        'purple-300': '#B7AEFF',
+        'purple-400': '#978BFF',
+        'purple-500': '#8173FF',
+        'purple-600': '#5B51B3',
+        'purple-700': '#4F469C',
 
         /** Gray **/
         'gray-100': '#F2F3F6',
@@ -27,14 +28,6 @@ export default {
         'gray-900': '#171D24',
         white: '#ffffff',
         black: '#121212',
-
-        /** subcolor**/
-        'subcolor1-100': '#FF83FB',
-        'subcolor1-200': '#D315C3',
-        'subcolor2-100': '#7CCBFF',
-        'subcolor2-200': '#1587D3',
-        'subcolor3-100': '#78E9BC',
-        'subcolor3-200': '#0BBD6D',
       },
       dropShadow: {
         shadow1: [
