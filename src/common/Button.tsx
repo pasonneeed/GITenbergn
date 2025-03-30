@@ -5,7 +5,7 @@ interface ButtonProps {
   onClick?: () => void;
   color?: 'primary' | 'secondary';
   className?: string;
-  type?: 'button' | 'submit' | 'reset';
+  type?: 'button' | 'submit';
   disabled?: boolean;
 }
 
@@ -14,15 +14,20 @@ const Button = ({
   onClick,
   color = 'primary',
   className,
-  type,
-  disabled,
+  type = 'button',
+  disabled = false,
 }: ButtonProps) => {
   const baseStyles =
-    'w-full rounded-xl text-white font-semibold py-3 transition-colors duration-200';
+    'rounded-2xl transition-colors duration-200 flex justify-center items-center';
   const colorStyles = {
-    primary: 'bg-[#8A7FFF] hover:bg-[#7365e6]',
-    secondary: 'bg-[#584B9D] hover:bg-[#483d84]',
+    primary: disabled
+      ? 'bg-purple-200 text-white cursor-not-allowed'
+      : 'bg-purple-500 hover:bg-purple-600 text-white',
+    secondary: disabled
+      ? 'bg-gray-100 text-gray-300 cursor-not-allowed'
+      : 'bg-purple-50 hover:bg-purple-100 text-purple-500',
   };
+
   return (
     <button
       type={type}
@@ -34,4 +39,5 @@ const Button = ({
     </button>
   );
 };
+
 export default Button;
