@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useMediaQuery = (query: string) => {
+const useMediaQuery = (query: string = '(max-width: 480px)') => {
   const [matches, setMatches] = useState<boolean>(false);
 
   useEffect(() => {
