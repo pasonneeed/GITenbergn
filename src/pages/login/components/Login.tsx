@@ -35,7 +35,6 @@ const Login = () => {
                   value={id}
                   onChange={(e) => setId(e.target.value)}
                   className="h-14 w-full font-B02-M"
-                  state="default"
                 />
               </div>
 
@@ -47,7 +46,6 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   isPassword
                   className="h-14 w-full font-B02-M"
-                  state="default"
                 />
               </div>
 
