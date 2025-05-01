@@ -10,7 +10,7 @@ const Login = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-white px-4">
       <div className="flex w-full max-w-[1200px]">
-        <div className="flex flex-1 items-center justify-center">
+        <div className="hidden flex-1 items-center justify-center md:flex">
           <img
             src={LoginImage}
             alt="로그인 이미지"
