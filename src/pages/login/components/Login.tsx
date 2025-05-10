@@ -10,7 +10,7 @@ const Login = () => {
   return (
     <div className="flex min-h-screen items-center justify-center bg-white px-4">
       <div className="flex w-full max-w-[1200px]">
-        <div className="hidden flex-1 items-center justify-center md:flex">
+        <div className="hidden w-1/2 items-center justify-center md:flex">
           <img
             src={LoginImage}
             alt="로그인 이미지"
@@ -18,7 +18,7 @@ const Login = () => {
           />
         </div>
 
-        <div className="flex flex-1 flex-col items-center justify-center">
+        <div className="flex w-full flex-col items-center justify-center md:w-1/2">
           <div className="w-full max-w-[400px] space-y-6">
             <div className="space-y-1 pb-8">
               <div className="text-3xl text-gray-600">당신의 인생 2막,</div>
