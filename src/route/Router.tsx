@@ -1,3 +1,4 @@
+import SignupFunnel from '@pages/signup/SignupFunnel';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const Router = () => {
@@ -5,6 +6,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" />
+        <Route path="/signup" element={<SignupFunnel />} />
       </Routes>
     </BrowserRouter>
   );
