@@ -16,6 +16,8 @@
       "@store/*": ["src/store/*"],
       "@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"]
-    }
-  }
+    },
+    "types": ["vite-plugin-svgr/client"]
+  },
+  "include": ["svg.d.ts"]
 }
