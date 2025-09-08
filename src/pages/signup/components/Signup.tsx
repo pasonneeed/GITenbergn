@@ -22,21 +22,26 @@ const Signup = ({ onNext }: SignupProps) => {
       >
         <div className="mb-[6px] text-gray-900 font-T01-B">회원가입하기</div>
 
-        <Input
-          inputtitle="아이디"
-          placeholder="아이디를 입력하세요"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
-          className="h-[68px] w-full px-5 py-6 font-B02-M"
-          undertext="4-20자/영문,숫자 조합"
-        />
+        <div className="relative w-full">
+          <Input
+            inputtitle="아이디"
+            placeholder="아이디를 입력하세요"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+            className="h-[68px] w-full pr-[84px] font-B02-M"
+            undertext="4-20자/영문,숫자 조합"
+          />
+          <button className="absolute right-4 top-[52%] h-[38px] -translate-y-1/2 cursor-pointer rounded-[10px] bg-gray-400 px-[10px] py-2 text-white font-B03-M">
+            중복확인
+          </button>
+        </div>
 
         <Input
           inputtitle="비밀번호"
           placeholder="비밀번호를 입력하세요"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="h-[68px] w-full px-5 py-6 font-B02-M"
+          className="h-[68px] w-full font-B02-M"
           undertext="8~16자/영문 대소문자,숫자,특수문자 조합"
         />
 
@@ -45,7 +50,7 @@ const Signup = ({ onNext }: SignupProps) => {
           placeholder="비밀번호를 입력하세요"
           value={passwordcheck}
           onChange={(e) => setPasswordCheck(e.target.value)}
-          className="h-[68px] w-full px-5 py-6 font-B02-M"
+          className="h-[68px] w-full font-B02-M"
         />
       </div>
 

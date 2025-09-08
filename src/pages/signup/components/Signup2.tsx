@@ -26,21 +26,26 @@ const Signup2 = () => {
       >
         <div className="text-gray-900 font-T01-B">회원가입하기</div>
 
-        <Input
-          inputtitle="닉네임"
-          placeholder="닉네임을 입력하세요"
-          value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
-          className="h-[68px] w-full px-5 py-6 font-B02-M"
-          undertext="2~8자 이내의 한글, 영문, 숫자"
-        />
+        <div className="relative w-full">
+          <Input
+            inputtitle="닉네임"
+            placeholder="닉네임을 입력하세요"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+            className="h-[68px] w-full pr-[84px] font-B02-M"
+            undertext="2~8자 이내의 한글, 영문, 숫자"
+          />
+          <button className="absolute right-4 top-[52%] h-[38px] -translate-y-1/2 cursor-pointer rounded-[10px] bg-gray-400 px-[10px] py-2 text-white font-B03-M">
+            중복확인
+          </button>
+        </div>
 
         <Input
           inputtitle="생년월일"
           placeholder="YYYY / MM / DD"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="h-[68px] w-full px-5 py-6 font-B02-M"
+          className="h-[68px] w-full font-B02-M"
         />
 
         <div className="flex w-full flex-col gap-2">
