@@ -77,7 +77,6 @@ const Signup2 = () => {
         <AddressInput onClick={ShowModal} />
       </div>
 
-      {isModal && <AddressModal />}
       <div
         className={`${
           isMobile
@@ -92,6 +91,7 @@ const Signup2 = () => {
           className="h-[60px] w-full font-T05-SB"
         />
       </div>
+      {isModal && <AddressModal onClose={() => setIsModal(false)} />}
     </div>
   );
 };
