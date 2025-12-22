@@ -9,9 +9,7 @@ export interface FunnelProps {
   children: Array<ReactElement<StepProps>>;
 }
 
-export const Step = (props: StepProps): ReactElement => {
-  return <>{props.children}</>;
-};
+export const Step = ({ children }: StepProps) => children;
 
 export const useFunnel = (defaultStep: string) => {
   const [step, setStep] = useState(defaultStep);
@@ -21,7 +19,7 @@ export const useFunnel = (defaultStep: string) => {
       (childStep) => childStep.props.name === step
     );
 
-    return <>{targetStep}</>;
+    return { targetStep };
   };
 
   return { Funnel, setStep, currentStep: step } as const;
