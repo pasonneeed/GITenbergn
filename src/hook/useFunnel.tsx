@@ -9,17 +9,18 @@ export interface FunnelProps {
   children: Array<ReactElement<StepProps>>;
 }
 
-export const Step = ({ children }: StepProps) => children;
-
+export const Step = ({ children }: StepProps): ReactNode => {
+  return children;
+};
 export const useFunnel = (defaultStep: string) => {
   const [step, setStep] = useState(defaultStep);
 
-  const Funnel = ({ children }: FunnelProps) => {
+  const Funnel = ({ children }: FunnelProps): JSX.Element | null => {
     const targetStep = children.find(
       (childStep) => childStep.props.name === step
     );
 
-    return { targetStep };
+    return targetStep ?? null;
   };
 
   return { Funnel, setStep, currentStep: step } as const;
