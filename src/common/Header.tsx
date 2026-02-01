@@ -1,0 +1,46 @@
+import Logo from '@assets/icons/mobileLogo.svg?react';
+import Button from './Button';
+import { Link, useNavigate } from 'react-router-dom';
+
+interface ShowProps {
+  type: 'show' | 'hide';
+}
+
+const NavItems = [
+  { label: '일자리 찾기', path: '/' },
+  { label: '배움터 찾기', path: '/' },
+  { label: '마이드림', path: '/' },
+  { label: '직업탐색', path: '/' },
+];
+
+const Header = ({ type }: ShowProps) => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="fixed left-0 top-0 flex h-20 w-full items-center justify-between border-b border-gray-200 bg-white px-[120px] py-5">
+      <div className="flex flex-row items-center gap-5">
+        <Logo />
+        {NavItems.map(({ label, path }) => (
+          <Link
+            key={label}
+            to={path}
+            className='<div className="flex font-B03-M"> items-center px-[15px] py-[10px] text-gray-600'
+          >
+            {label}
+          </Link>
+        ))}
+      </div>
+
+      {type === 'show' && (
+        <Button
+          text="로그인"
+          color="primary"
+          className="flex h-[38px] items-center justify-center rounded-[10px] px-6 py-[10px]"
+          onClick={() => navigate('/login')}
+        />
+      )}
+    </div>
+  );
+};
+
+export default Header;
