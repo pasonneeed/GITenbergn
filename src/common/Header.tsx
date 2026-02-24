@@ -24,7 +24,7 @@ const Header = ({ type }: ShowProps) => {
           <Link
             key={label}
             to={path}
-            className='<div className="flex font-B03-M"> items-center px-[15px] py-[10px] text-gray-600'
+            className="flex items-center px-[15px] py-[10px] text-gray-600 font-B03-M"
           >
             {label}
           </Link>
