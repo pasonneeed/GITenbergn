@@ -3,9 +3,11 @@ import { Outlet } from 'react-router-dom';
 
 const HideLayout = () => {
   return (
-    <div className="max-h-[1024px] min-h-screen bg-white">
-      <Header type="hide" />
-      <main className="flex-1">
+    <div className="grid min-h-screen w-full grid-rows-[80px_1fr] bg-white">
+      <div>
+        <Header type="hide" />
+      </div>
+      <main className="w-full">
         <Outlet />
       </main>
     </div>
