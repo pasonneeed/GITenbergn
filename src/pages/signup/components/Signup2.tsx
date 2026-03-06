@@ -18,7 +18,7 @@ const Signup2 = () => {
     setIsModal(true);
   };
   return (
-    <div className="flex h-screen flex-col items-center justify-center">
+    <div className="flex w-full flex-col items-center justify-center">
       <div
         className={`flex flex-col items-start gap-[30px] ${
           isMobile ? 'w-full max-w-[393px] px-4' : 'w-full max-w-[424px]'

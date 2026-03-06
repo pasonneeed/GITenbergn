@@ -7,7 +7,7 @@ const HideLayout = () => {
       <div>
         <Header type="hide" />
       </div>
-      <main className="w-full">
+      <main className="flex w-full items-center justify-center">
         <Outlet />
       </main>
     </div>

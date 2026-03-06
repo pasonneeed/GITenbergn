@@ -9,7 +9,7 @@ const Login = () => {
   const [id, setId] = useState('');
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-white px-4">
+    <div className="flex items-center justify-center bg-white px-4">
       <div className="flex w-full max-w-[1200px]">
         <div className="hidden w-1/2 items-center justify-center md:flex">
           <img
