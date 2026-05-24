@@ -19,7 +19,7 @@ const options = [
 
 const OnBoardingPage = () => {
   const [selected, setSelected] = useState('');
-  const [curStep, setCurStep] = useState(1);
+  const [curStep, setCurStep] = useState(0);
 
   const handlePrev = () => {
     setCurStep((prev) => Math.max(prev - 1, 0));
@@ -32,7 +32,7 @@ const OnBoardingPage = () => {
   return (
     <div className="min-h-screen bg-white px-4 py-10">
       <div className="flex justify-center">
-        <div className="w-full max-w-[480px]">
+        <div className="w-full max-w-[900px]">
           <Stepper curStep={curStep} steps={steps} />
         </div>
       </div>
