@@ -20,7 +20,7 @@ const Stepper = ({ curStep, steps }: StepperProps) => {
 
               {/* 마지막 step 이후에는 선을 그리지 않음 */}
               {index !== steps.length - 1 && (
-                <div className="mx-1 h-0.5 w-10 bg-gray-200 md:w-24" />
+                <div className="mx-1 h-0.5 w-48 bg-gray-200 md:w-52" />
               )}
             </div>
           );
