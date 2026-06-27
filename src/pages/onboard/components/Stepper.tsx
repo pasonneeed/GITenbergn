@@ -1,31 +1,43 @@
-import Step from '@pages/onboard/components/Step.tsx';
+import Step from '@pages/onboard/components/Step';
 
 interface StepperProps {
   curStep: number;
   steps: { title: string }[];
+  progress: number;
 }
+const Stepper = ({ curStep, steps, progress }: StepperProps) => {
+  const totalConnectors = steps.length - 1;
 
-const Stepper = ({ curStep, steps }: StepperProps) => {
   return (
-    <div className="mx-auto flex w-full justify-center">
-      <div className="flex w-full items-center gap-2">
-        {steps.map((step, index) => {
-          const status: 'prev' | 'current' | 'next' =
-            index < curStep ? 'prev' : index === curStep ? 'current' : 'next';
+    <div className="mx-auto flex w-full max-w-[900px] items-center justify-between">
+      {steps.map((step, index) => {
+        const status: 'prev' | 'current' | 'next' =
+          index < curStep ? 'prev' : index === curStep ? 'current' : 'next';
 
-          return (
-            <div key={index} className="flex items-center">
-              {/* step 본체 */}
-              <Step stepNumber={index + 1} title={step.title} status={status} />
+        return (
+          <div key={index} className="flex flex-1 items-center">
+            <Step stepNumber={index + 1} title={step.title} status={status} />
 
-              {/* 마지막 step 이후에는 선을 그리지 않음 */}
-              {index !== steps.length - 1 && (
-                <div className="mx-1 h-0.5 w-48 bg-gray-200 md:w-52" />
-              )}
-            </div>
-          );
-        })}
-      </div>
+            {/* 커넥터가 필요한 경우만 렌더링 */}
+            {index !== steps.length - 1 && (
+              <div className="relative mx-1 h-0.5 flex-1 overflow-hidden bg-gray-200">
+                {/* 퍼센트 채워진 부분 */}
+                <div
+                  className="absolute left-0 top-0 h-full bg-purple-500 transition-all duration-300"
+                  style={{
+                    width: `${
+                      Math.min(
+                        Math.max(progress - (index * 100) / totalConnectors, 0),
+                        100 / totalConnectors
+                      ) * totalConnectors
+                    }%`,
+                  }}
+                />
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 };
