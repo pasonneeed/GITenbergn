@@ -5,23 +5,26 @@ interface StepperProps {
   steps: { title: string }[];
   progress: number;
 }
+
 const Stepper = ({ curStep, steps, progress }: StepperProps) => {
   const totalConnectors = steps.length - 1;
 
   return (
-    <div className="mx-auto flex w-full max-w-[900px] items-center justify-between">
+    <div className="mx-auto flex w-full max-w-[1100px] items-center">
       {steps.map((step, index) => {
+        const isLast = index === steps.length - 1;
         const status: 'prev' | 'current' | 'next' =
           index < curStep ? 'prev' : index === curStep ? 'current' : 'next';
 
         return (
-          <div key={index} className="flex flex-1 items-center">
+          <div
+            key={index}
+            className={`flex items-center ${!isLast ? 'flex-1' : ''} `}
+          >
             <Step stepNumber={index + 1} title={step.title} status={status} />
 
-            {/* 커넥터가 필요한 경우만 렌더링 */}
-            {index !== steps.length - 1 && (
+            {!isLast && (
               <div className="relative mx-1 h-0.5 flex-1 overflow-hidden bg-gray-200">
-                {/* 퍼센트 채워진 부분 */}
                 <div
                   className="absolute left-0 top-0 h-full bg-purple-500 transition-all duration-300"
                   style={{
@@ -41,4 +44,5 @@ const Stepper = ({ curStep, steps, progress }: StepperProps) => {
     </div>
   );
 };
+
 export default Stepper;

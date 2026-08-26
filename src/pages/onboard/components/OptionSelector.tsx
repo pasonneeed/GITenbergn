@@ -25,7 +25,7 @@ const OptionSelector = ({ options, value, onChange }: OptionSelectorProps) => {
                 : 'border-gray-300 bg-white text-gray-800'
             )}
           >
-            <span className="font-B02-M">{option}</span>
+            <span className="font-B01-M">{option}</span>
 
             {isSelected && <CheckIcon className="h-5 w-5 text-purple-500" />}
           </button>
