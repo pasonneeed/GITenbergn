@@ -18,7 +18,7 @@ const Questions = ({ question, options, value, onChange }: QuestionsProps) => {
       />
 
       <div className="flex flex-1 flex-col space-y-8">
-        <h2 className="text-gray-900 font-T04-SB">{question}</h2>
+        <h2 className="text-gray-900 font-T03-SB">{question}</h2>
 
         <OptionSelector options={options} value={value} onChange={onChange} />
       </div>
