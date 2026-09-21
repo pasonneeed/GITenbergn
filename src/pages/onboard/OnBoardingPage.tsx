@@ -20,7 +20,7 @@ const OnBoardingPage = () => {
   return (
     <div className="min-h-screen bg-white px-4 py-10">
       <div className="flex justify-center">
-        <div className="w-full max-w-[900px]">
+        <div className="w-full max-w-[1500px]">
           <Stepper
             curStep={curStep}
             steps={stepQuestions.map((s) => ({ title: s.step }))}
@@ -29,7 +29,7 @@ const OnBoardingPage = () => {
         </div>
       </div>
 
-      <div className="mx-auto mt-12 w-full max-w-[700px] space-y-10">
+      <div className="mx-auto mt-10 w-full max-w-[700px] space-y-10">
         {currentQuestionData && (
           <Questions
             question={currentQuestionData.question}
