@@ -16,7 +16,7 @@ const Navigation = ({
   isLast,
 }: NavigationProps) => {
   return (
-    <div className="flex justify-end gap-4 pt-40">
+    <div className="flex justify-end gap-4 pt-20">
       <Button
         text="이전"
         color="secondary"
