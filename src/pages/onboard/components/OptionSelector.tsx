@@ -21,7 +21,7 @@ const OptionSelector = ({ options, value, onChange }: OptionSelectorProps) => {
             className={clsx(
               'flex w-full items-center justify-between rounded-2xl border px-4 py-5 transition',
               isSelected
-                ? 'border-purple-400 bg-purple-100 text-purple-500'
+                ? 'border-purple-500 bg-purple-100 text-purple-500'
                 : 'border-gray-300 bg-white text-gray-800'
             )}
           >
