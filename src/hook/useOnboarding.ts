@@ -41,7 +41,7 @@ export function useOnboarding(steps: StepQuestion[]) {
     }
   };
 
-  const { totalQuestions, progressPercent } = useMemo(() => {
+  const totalQuestions = useMemo(() => {
     const total = steps.reduce(
       (sum, st) => sum + (st.questions?.length ?? 1),
       0
@@ -65,6 +65,5 @@ export function useOnboarding(steps: StepQuestion[]) {
     handleNext,
     handlePrev,
     totalQuestions,
-    progressPercent,
   } as const;
 }
