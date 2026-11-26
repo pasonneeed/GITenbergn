@@ -14,8 +14,11 @@ const OnBoardingPage = () => {
     handleOptionChange,
     handleNext,
     handlePrev,
-    progressPercent,
   } = useOnboarding(stepQuestions);
+  const stepInfo = stepQuestions.map((s) => ({
+    title: s.step,
+    questionCount: s.questions?.length ?? 1,
+  }));
 
   return (
     <div className="min-h-screen bg-white px-4 py-10">
@@ -23,8 +26,8 @@ const OnBoardingPage = () => {
         <div className="w-full max-w-[1500px]">
           <Stepper
             curStep={curStep}
-            steps={stepQuestions.map((s) => ({ title: s.step }))}
-            progress={progressPercent}
+            curQuestionIndex={curQuestionIndex}
+            steps={stepInfo}
           />
         </div>
       </div>
