@@ -14,11 +14,8 @@ const OnBoardingPage = () => {
     handleOptionChange,
     handleNext,
     handlePrev,
+    stepInfo,
   } = useOnboarding(stepQuestions);
-  const stepInfo = stepQuestions.map((s) => ({
-    title: s.step,
-    questionCount: s.questions?.length ?? 1,
-  }));
 
   return (
     <div className="min-h-screen bg-white px-4 py-10">

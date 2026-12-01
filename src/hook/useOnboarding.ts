@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import stepQuestions from '@utils/data/onboard/onboardDummy.ts';
 
 interface StepQuestion {
   step: string;
@@ -12,7 +13,10 @@ export function useOnboarding(steps: StepQuestion[]) {
 
   const currentStepData = steps[curStep];
   const currentQuestionData = currentStepData.questions?.[curQuestionIndex];
-
+  const stepInfo = stepQuestions.map((s) => ({
+    title: s.step,
+    questionCount: s.questions?.length ?? 1,
+  }));
   const handleOptionChange = (value: string) => {
     const stepName = currentStepData.step;
     const prev = answers[stepName] || [];
@@ -65,5 +69,6 @@ export function useOnboarding(steps: StepQuestion[]) {
     handleNext,
     handlePrev,
     totalQuestions,
+    stepInfo,
   } as const;
 }
